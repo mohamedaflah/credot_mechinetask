@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Agdasima&family=Akaya+Telivigala&family=Amatic+SC&family=Bebas+Neue&family=Comfortaa:wght@300;400;600&family=Fira+Sans:ital,wght@0,200;0,300;0,500;1,100;1,200;1,700;1,800&family=Gemunu+Libre:wght@200;500;600;700;800&family=Glass+Antiqua&family=Josefin+Slab:ital,wght@0,100;0,200;0,400;0,700;1,100;1,200;1,300&family=Kanit:ital,wght@0,200;0,400;0,500;0,700;0,800;0,900;1,100;1,200;1,400;1,600;1,800;1,900&family=Life+Savers:wght@400;700&family=Michroma&family=Mukta:wght@200;400&family=Noto+Sans+Mono:wght@100;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,700;0,800;1,300;1,400;1,800&family=Orbitron:wght@400;500;600;700;800&family=Oswald:wght@500&family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,200;1,400&family=Quicksand:wght@300;400&family=Roboto:wght@400;500;700&family=Rubik+Vinyl&family=Satisfy&family=Shadows+Into+Light&family=Snippet&family=Solitreo&family=Syncopate:wght@400;700&display=swap");
+*{
+    font-family: "Poppins", "sans-serif";
+}
+#scrollable::-webkit-scrollbar{
+    display: none;
+}
