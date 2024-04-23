@@ -8,8 +8,8 @@ function Cart() {
       </header>
       <section className="w-[85%] md:w-[80%]  mx-auto mt-8">
         <div className="flex flex-col xl:flex-row lg:items-start gap-10">
-          <div className="w-full min-h-56 flex flex-col  ">
-            <div className="flex border-b border-[#E2E2E2] py-1 justify-between">
+          <div className="w-full min-h-56 flex flex-col overflow-x-auto ">
+            <div className="flex border-b border-[#E2E2E2] py-1 justify-between min-w-[500px]">
               <div className="w-56 ">
                 <span className="text-sm uppercase">Product</span>
               </div>
@@ -36,7 +36,7 @@ function Cart() {
                   apply coupon
                 </button>
               </div>
-              <button className="h-full w-48 border-2 border-black text-sm uppercase font-semibold">
+              <button className="h-full w-40 border-2 border-black text-sm uppercase font-semibold">
                 update cart
               </button>
             </div>
@@ -50,7 +50,7 @@ function Cart() {
                     placeholder="Apply coupon"
                     className="h-full w-full text-[12px] md:text-sm pl-3 outline-none"
                   />
-                  <button className="h-full text-[9px] w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
+                  <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
                     apply coupon
                   </button>
                 </div>

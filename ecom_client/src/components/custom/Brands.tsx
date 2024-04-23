@@ -16,7 +16,7 @@ export default function Brands() {
       <div className=" w-[86%] sm:w-[80%] mx-auto">
         <h1 className="font-semibold text-lg">Top Brands</h1>
       </div>
-      <div className="w-[98%] sm:w-[90%]  mx-auto  flex h-28 items-center py-4 gap-2 md:py-2">
+      <div className="w-[98%] sm:w-[90%]  mx-auto mt-5  flex h-28 items-center py-4 gap-2 md:py-2">
         <div onClick={() => handleScrolling(-400)}>
           <HeaderIcon Image={leftIco} className="p-1 w-8 h-8" />
         </div>

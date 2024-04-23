@@ -1,4 +1,4 @@
-import Logo from "../../assets/headerLogo.svg";
+import Logo from "@/assets/Logo@.svg";
 import Search from "../../assets/Search.svg";
 import User from "../../assets/user.svg";
 import Whishlist from "../../assets/heart.svg";
@@ -17,7 +17,7 @@ import {
 } from "../../shad/ui/sheet";
 import { useState } from "react";
 import { Button } from "@/shad/ui/button";
-import WhishListSheet from "../custom/Whishsheet";
+
 export const Header = () => {
   const [search, setSearch] = useState<boolean>(false);
   return (
@@ -38,8 +38,9 @@ export const Header = () => {
             </div>
           </div>
           <div className="h-full  w-48  border-l border[#EBEBEB] flex items-center justify-end gap-2">
-            <HeaderIcon Image={User} />
-            <WhishListSheet ShowIcon={<HeaderIcon Image={Whishlist} />}/>
+            <div className="h-full border-r px-2">
+              <HeaderIcon Image={User} />
+            </div>
             <HeaderIcon Image={Cart} />
           </div>
         </div>

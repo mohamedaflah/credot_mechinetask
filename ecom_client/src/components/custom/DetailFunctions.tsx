@@ -1,6 +1,7 @@
 import start from "../../assets/Vector.svg";
 import { IoMdHeartEmpty } from "react-icons/io";
 import QuantityButton from "../common/Qtybutton";
+import { IoCheckmark } from "react-icons/io5";
 function DetailFunctions() {
   return (
     <div className="w-full min-h-96 flex flex-col py-3 px-2 md:w-auto md:h-full md:py-0">
@@ -48,7 +49,9 @@ function DetailFunctions() {
             <div className="w-10 h-10 rounded-full bg-[#DE4E47]" />
           </div>
           <div className="w-14 h-14 rounded-full bg-[#F8F8F8] flex items-center justify-center">
-            <div className="w-10 h-10 rounded-full bg-[#4F6A45]" />
+            <div className="w-10 h-10 rounded-full bg-[#4F6A45] flex items-center justify-center">
+            <IoCheckmark className="text-white text-2xl" />
+            </div>
           </div>
           <div className="w-14 h-14 rounded-full bg-[#F8F8F8] flex items-center justify-center">
             <div className="w-10 h-10 rounded-full bg-[#9C9C9C]" />

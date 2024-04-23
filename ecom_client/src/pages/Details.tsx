@@ -34,12 +34,12 @@ function Detail() {
         <div className="flex flex-col mt-3">
           <div className="w-full font-semibold border-b h-12">Related Product</div>
         </div>
-        <div className="w-full flex">
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-4 justify-center items-center gap-4">
+          <ProductCard className="w-full"/>
+          <ProductCard className="w-full"/>
+          <ProductCard className="w-full"/>
+          <ProductCard className="w-full"/>
+          <ProductCard className="w-full"/>
         </div>
       </div>
     </main>
