@@ -1,5 +1,6 @@
 
-import LandingImage from "../../assets/landing.png";
+import LandingImage from "@/assets/LandingPageImage.png";
+
 // import { FaAngleLeft } from "react-icons/fa6";
 // import { FaAngleRight } from "react-icons/fa6";
 

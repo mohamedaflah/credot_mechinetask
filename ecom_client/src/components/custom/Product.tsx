@@ -3,7 +3,7 @@ import Iphone from "../../assets/Apple.png";
 import ProductCard from "./ProductCard";
 export default function Product() {
   return (
-    <section className="w-[86%] sm:w-[80%] mx-auto mt-4">
+    <section className="w-[86%] sm:w-[80%] mx-auto mt-5">
       <div className="w-full ">
         <div className="w-full flex justify-between">
           <h1 className="font-semibold text-lg">Product</h1>

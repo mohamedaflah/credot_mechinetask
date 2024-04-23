@@ -5,3 +5,6 @@
 #scrollable::-webkit-scrollbar{
     display: none;
 }
+.scrollbarDiv::-webkit-scrollbar{
+    display: none;
+}
