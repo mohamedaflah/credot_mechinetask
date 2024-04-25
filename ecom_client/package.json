@@ -19,6 +19,7 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.0-rc22",
     "lucide-react": "^0.331.0",
     "primereact": "^10.6.3",

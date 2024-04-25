@@ -3,5 +3,8 @@ export interface User {
   name: string;
   password: string;
   _id?: string;
-  role:"admin"|"user"
+  role: "admin" | "user";
+  createdAt: Date;
+  updatedAt: Date;
+  status: boolean;
 }

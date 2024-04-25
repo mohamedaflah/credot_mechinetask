@@ -14,6 +14,9 @@ import { AppDispatch, RootState } from "./redux/store";
 import Signup from "./pages/Signup";
 import { useEffect } from "react";
 import { getUser } from "./redux/actions/users/getUserAction";
+import { CategoryPage } from "./pages/Admin/Categories";
+import { BrandPage } from "./pages/Admin/Brands";
+import { UsersPage } from "./pages/Admin/Users";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -59,6 +62,9 @@ function App() {
           }
         >
           <Route index element={<ProductList />} />
+          <Route path="categories" element={<CategoryPage/>} />
+          <Route path="brands" element={<BrandPage/>} />
+          <Route path="users" element={<UsersPage/>}/>
         </Route>
       </Routes>
       {role!=="admin"&&<Footer />}

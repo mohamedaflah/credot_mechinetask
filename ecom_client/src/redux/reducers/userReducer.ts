@@ -6,12 +6,15 @@ import { getUser } from "../actions/users/getUserAction";
 import toast from "react-hot-toast";
 import { userLogoutAction } from "../actions/users/logoutUserAction";
 import { userLoginAction } from "../actions/users/loginUserAction";
+import { getAllUsersAction } from "../actions/users/getAllUsers";
+
 
 const initialState: UserReducerInitial = {
   loading: false,
   err: false,
   user: null,
   role: null,
+  users: null,
 };
 const userReducer = createSlice({
   name: "userReducer",
@@ -48,6 +51,9 @@ const userReducer = createSlice({
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
         state.user = null;
+        if (state.err === "Your Permission Denied by Admin") {
+          toast.caller(state.err);
+        }
       })
       .addCase(userLogoutAction.pending, (state) => {
         state.loading = true;
@@ -71,13 +77,31 @@ const userReducer = createSlice({
         state.user = payload.user;
         state.role = payload.role;
         state.err = false;
-        toast.success("Login succesfull")
+        toast.success("Login succesfull");
       })
       .addCase(userLoginAction.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
         state.user = null;
         toast.error(state.err);
+      })
+      .addCase(getAllUsersAction.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(
+        getAllUsersAction.fulfilled,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (state, { payload }: { payload: any }) => {
+          state.users = payload?.users;
+
+          state.loading = false;
+          state.err = false;
+        }
+      )
+      .addCase(getAllUsersAction.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
+        toast.error(state.err)
       });
   },
 });

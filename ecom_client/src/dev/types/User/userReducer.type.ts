@@ -5,4 +5,5 @@ export interface UserReducerInitial {
   err: boolean | string;
   user: User | null;
   role: "user" | "admin" | null;
+  users: User[] | null;
 }
