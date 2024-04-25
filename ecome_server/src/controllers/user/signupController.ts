@@ -12,12 +12,12 @@ export const signupUser = async (
   try {
     if (!req.body?.email) throw new Error("Pleae provide email ");
     if (!req.body?.password) throw new Error("Please provide password");
-    let { email, password, name } = req.body;
+    let { email, password, name, role } = req.body;
     if (!validateUserData(email, password).valid) {
       throw new Error(validateUserData(email, password).message);
     }
     const emailExist = await UserModel.findOne({ email });
-   
+
     if (emailExist) {
       throw new Error("User already exist with this email");
     }
@@ -26,18 +26,19 @@ export const signupUser = async (
       email,
       password,
       name,
+      role,
     });
     await newUser.save();
-    const acessToken = generateToken({ userId: newUser._id });
+    const acessToken = generateToken({ userId: newUser._id, role });
     res.cookie(process.env.COOKIE_NAME as string, acessToken, {
       httpOnly: true,
       // secure: true,
-      // sameSite: "strict", 
+      // sameSite: "strict",
       maxAge: 15 * 24 * 60 * 60 * 1000,
     });
     res
       .status(200)
-      .json({ status: true, message: "Successfull", user: newUser });
+      .json({ status: true, message: "Successful", user: newUser, role });
   } catch (error) {
     next(error);
   }

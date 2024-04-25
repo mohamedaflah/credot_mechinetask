@@ -18,6 +18,10 @@ const UserModel = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+    },
   },
   { timestamps: true }
 );

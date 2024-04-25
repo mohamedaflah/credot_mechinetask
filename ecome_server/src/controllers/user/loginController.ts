@@ -14,21 +14,32 @@ export const loginUser = async (
       throw new Error("User not registered");
     }
 
+    if (!userExist.status) {
+      throw new Error("Your Permission has been denied by admin");
+    }
     const passCompare = await bcrypt.compare(password, userExist.password);
     if (!passCompare) {
       throw new Error("User not registered");
     }
 
-    const acessToken = generateToken({ userId: userExist._id });
+    const acessToken = generateToken({
+      userId: userExist._id,
+      role: userExist.role,
+    });
     res.cookie(process.env.COOKIE_NAME as string, acessToken, {
       httpOnly: true,
-    //   secure: true,
-    //   sameSite: "strict",
+      //   secure: true,
+      //   sameSite: "strict",
       maxAge: 15 * 24 * 60 * 60 * 1000,
     });
     res
       .status(200)
-      .json({ status: true, message: "Succesfull", user: userExist });
+      .json({
+        status: true,
+        message: "Succesfull",
+        user: userExist,
+        role: userExist.role,
+      });
   } catch (error) {
     next(error);
   }
