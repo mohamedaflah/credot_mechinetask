@@ -1,4 +1,4 @@
-import { signupFormSchema } from "@/Schema/singupForm";
+import { signupFormSchema } from "@/Schema/user/singupForm";
 
 import { Input } from "@/shad/ui/input";
 import { Link } from "react-router-dom";

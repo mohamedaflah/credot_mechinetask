@@ -46,7 +46,7 @@ const brandReducer = createSlice({
         state.err = (payload as ErrorPayload).message;
         toast.error(state.err);
       })
-      .addCase(updateBrandAction.rejected, (state) => {
+      .addCase(updateBrandAction.pending, (state) => {
         state.loading = true;
       })
       .addCase(updateBrandAction.fulfilled, (state, { payload }) => {
@@ -78,7 +78,7 @@ const brandReducer = createSlice({
         }) as Brand[];
         state.err = false;
       })
-      .addCase(updateBrandAction.rejected, (state, { payload }) => {
+      .addCase(deleteBrandAction.rejected, (state, { payload }) => {
         state.err = (payload as ErrorPayload).message;
         state.loading = false;
       });

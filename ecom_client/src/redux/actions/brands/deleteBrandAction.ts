@@ -4,7 +4,7 @@ import { handleErrors } from "@/util/handleError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const deleteBrandAction = createAsyncThunk(
-  "brand/update-brand",
+  "brand/delete-brand",
   async (
     sendData: {
       brandId: string;

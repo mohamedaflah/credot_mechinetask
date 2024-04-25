@@ -3,7 +3,10 @@ import leftIco from "../../assets/lefft-.svg";
 import rightIco from "../../assets/right-.svg";
 import AppleLogo from "../../assets/AppleBrand.png";
 import RealmeLogo from "../../assets/realme.png";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBrands } from "@/redux/actions/brands/getAllBrandAction";
 export default function Brands() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const handleScrolling = (value: number) => {
@@ -11,6 +14,11 @@ export default function Brands() {
       scrollAreaRef.current.scrollLeft += value; // Adjust the scroll distance as needed
     }
   };
+  const dispatch: AppDispatch = useDispatch();
+  const { brands } = useSelector((state: RootState) => state.brand);
+  useEffect(() => {
+    dispatch(getAllBrands("user"));
+  }, [dispatch]);
   return (
     <section className=" mt-8">
       <div className=" w-[86%] sm:w-[80%] mx-auto">
@@ -25,22 +33,13 @@ export default function Brands() {
           id="scrollable"
           ref={scrollAreaRef}
         >
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={AppleLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
-          <img src={RealmeLogo} alt="" className="h-full" />
+          {brands?.map((brand) => (
+            <img
+              src={brand.image}
+              alt=""
+              className="size-20 rounded-full object-cover"
+            />
+          ))}
         </div>
         <div onClick={() => handleScrolling(400)}>
           <HeaderIcon Image={rightIco} className="p-1 w-8 h-8" />

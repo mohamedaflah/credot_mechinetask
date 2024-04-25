@@ -4,8 +4,8 @@ import { handleErrors } from "@/util/handleError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getAllBrands = createAsyncThunk(
-  "brand/update-brand",
-  async (_, { rejectWithValue }) => {
+  "brand/getAll-brand",
+  async (query?:"admin"|"user", { rejectWithValue }) => {
     try {
       const { data } = await BrandAxios.get(`/brand`);
       return data;

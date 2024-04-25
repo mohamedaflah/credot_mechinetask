@@ -1,4 +1,4 @@
-import { loginFormSchema } from "@/Schema/loginForm";
+import { loginFormSchema } from "@/Schema/user/loginForm";
 import { LoaderButton } from "@/components/custom/LoaderButton";
 import { userLoginAction } from "@/redux/actions/users/loginUserAction";
 import { AppDispatch, RootState } from "@/redux/store";
