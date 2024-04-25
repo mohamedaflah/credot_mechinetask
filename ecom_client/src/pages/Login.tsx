@@ -1,7 +1,6 @@
 import { Button } from "@/shad/ui/button";
 import { Input } from "@/shad/ui/input";
-import { FcGoogle } from "react-icons/fc";
-import { ImAppleinc } from "react-icons/im";
+
 export default function Login() {
   return (
     <main className="w-full bg-[#F4F4F4] h-screen flex items-center justify-center">
@@ -18,23 +17,19 @@ export default function Login() {
         <div className="flex flex-col px-3 gap-5">
           <Input
             type="text"
-            placeholder="Enter Mobile Number"
-            className="py-6 rounded-sm bg-transparent"
+            placeholder="Enter email id"
+            className="py-6 border-gray-300 rounded-sm bg-transparent"
           />
-          <div className="flex items-center justify-center py-3 ">
-            <span className="text-sm text-[#777777]">OR</span>
-          </div>
-          <div className="flex justify-center items-center border h-12 gap-2">
-            <FcGoogle className="text-2xl" />{" "}
-            <span className="text-sm">Login with Google</span>
-          </div>
-          <div className="flex justify-center items-center border h-12 gap-2">
-            <ImAppleinc className="text-2xl" />{" "}
-            <span className="text-sm">Signin with Apple</span>
-          </div>
+          <Input
+            type="password"
+            placeholder="Password"
+            className="py-6 border-gray-300 rounded-sm bg-transparent"
+          />
+
           <div className="flex justify-center items-center  h-12 gap-2">
-            
-            <Button className="bg-[#1AA5C3] rounded-sm w-32 h-full uppercase">Get Otp</Button>
+            <Button className="bg-[#1AA5C3] rounded-sm w-32 h-full uppercase">
+              login
+            </Button>
           </div>
         </div>
       </div>

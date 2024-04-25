@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Detail from "./pages/Details";
 import Cart from "./pages/Cart";
 import WhishList from "./pages/Whishlist";
+import { AdminLayout } from "./pages/Admin/Layout/AdminLayout";
+import { ProductList } from "./pages/Admin/ProductList";
 function App() {
   
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/product/:id" element={<Detail />} />  {/* Product detail page  */}
         <Route path='/cart' element={<Cart/>} />  {/*  Cart page */}
         <Route path='/whishlist' element={<WhishList/>}/>  {/* Whish list page */}
+        <Route path="/admin/" element={<AdminLayout/>}>
+          <Route index element={<ProductList/>}/>
+        </Route>
       </Routes>
       <Footer />
     </main>
