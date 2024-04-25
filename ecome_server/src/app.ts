@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
 import cookieParser = require("cookie-parser");
 import { errorHandler } from "./middlewares/errorHandler";
 import userRouter from "./routers/userRoute";
-dotenv.config();
 const app: Application = express();
 
 const corsOptions = {
@@ -15,6 +15,8 @@ const corsOptions = {
 // middlewares
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(express.json());
+
 
 app.use(`/api/v1/user`, userRouter); // user router
 

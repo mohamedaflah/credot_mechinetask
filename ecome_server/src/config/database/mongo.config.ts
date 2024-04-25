@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 mongoose
-  .connect(process.env.MONGODB_URL as string)
+  .connect(process.env.MONGODB_URL as string,{dbName:"credotTask"})
   .then(() => {
     console.log(` Db connected `);
   })
