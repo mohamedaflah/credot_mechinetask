@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 import { userLogoutAction } from "../actions/users/logoutUserAction";
 import { userLoginAction } from "../actions/users/loginUserAction";
 import { getAllUsersAction } from "../actions/users/getAllUsers";
-
+import { userStatusAction } from "../actions/users/userStatusAction";
+import { User } from "@/dev/types/User/user.type";
 
 const initialState: UserReducerInitial = {
   loading: false,
@@ -46,6 +47,9 @@ const userReducer = createSlice({
         state.user = payload.user;
         state.err = false;
         state.role = payload.role;
+        if(payload.message=="Your Permission Denied by Admin"){
+          toast.error("Your Permission Denied by Admin")
+        }
       })
       .addCase(getUser.rejected, (state, { payload }) => {
         state.loading = false;
@@ -101,7 +105,26 @@ const userReducer = createSlice({
       .addCase(getAllUsersAction.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
-        toast.error(state.err)
+        toast.error(state.err);
+      })
+      .addCase(userStatusAction.pending, (status) => {
+        status.loading = false;
+      })
+      .addCase(userStatusAction.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.users = state.users?.map((user) => {
+          if (user._id == payload.user._id) {
+            return payload.user;
+          } else {
+            return user;
+          }
+        }) as User[];
+        state.err = false;
+      })
+      .addCase(userStatusAction.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
+        toast.error(state.err);
       });
   },
 });

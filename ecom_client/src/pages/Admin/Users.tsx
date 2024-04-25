@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import { FaLockOpen } from "react-icons/fa6";
+import { userStatusAction } from "@/redux/actions/users/userStatusAction";
 export function UsersPage() {
   const { users, loading } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -89,21 +90,31 @@ export function UsersPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          {user.status ? (
-                            <button
-                              type="button"
-                              className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                            >
-                              <LockKeyhole />
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                            >
-                              <FaLockOpen   />
-                            </button>
-                          )}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (user.status) {
+                              
+                                dispatch(
+                                  userStatusAction({
+                                    status: false,
+                                    userId: String(user._id),
+                                  })
+                                );
+                              }else{
+                                
+                                dispatch(
+                                  userStatusAction({
+                                    status: true,
+                                    userId: String(user._id),
+                                  })
+                                );
+                              }
+                            }}
+                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                          >
+                            {user.status ? <LockKeyhole /> : <FaLockOpen className="text-[19px]"/>}
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -113,7 +124,7 @@ export function UsersPage() {
             </div>
           </div>
         ) : (
-          <div className="w-full h-full">
+          <div className="w-full h-full flex items-center justify-center">
             <Loader className="animate-spin" />
           </div>
         )}
