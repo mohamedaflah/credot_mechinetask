@@ -1,3 +1,4 @@
+import { BrandEditForm } from "@/components/brand/BrandEditForm";
 import { BrandForm } from "@/components/brand/BrandForm";
 import { AmdinLoader } from "@/components/custom/AdminTableLoader";
 import { CustomeModal } from "@/components/custom/CustomeModa";
@@ -5,6 +6,7 @@ import { getAllBrands } from "@/redux/actions/brands/getAllBrandAction";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Button } from "@/shad/ui/button";
 import { format } from "date-fns";
+import { Edit } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -73,37 +75,48 @@ export function BrandPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {brands?.map((brand) => (
-                      <tr className="cursor-pointer" key={brand._id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                          {brand.title}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                          <img
-                            src={brand.image}
-                            className="size-10 rounded-full object-cover"
-                            alt=""
-                          />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                          1
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          {format(String(brand.createdAt), "PPP")}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          {format(String(brand.updatedAt), "PPP")}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          <button
-                            type="button"
-                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                    {brands !== undefined &&
+                      brands?.map((brand) => (
+                        <tr className="cursor-pointer" key={brand?._id}>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                            {brand?.title}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                            <img
+                              src={brand?.image}
+                              className="size-10 rounded-full object-cover"
+                              alt=""
+                            />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                            1
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                            {brand && brand?.createdAt && (
+                              <>{format(String(brand?.createdAt), "PPP")}</>
+                            )}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                            {brand && brand?.updatedAt && (
+                              <>{format(String(brand?.updatedAt), "PPP")}</>
+                            )}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                            <CustomeModal
+                              trigger={
+                                <button
+                                  type="button"
+                                  className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                                >
+                                  <Edit />
+                                </button>
+                              }
+                            >
+                              <BrandEditForm brand={brand} />
+                            </CustomeModal>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

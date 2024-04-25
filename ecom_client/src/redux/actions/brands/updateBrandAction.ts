@@ -8,7 +8,7 @@ export const updateBrandAction = createAsyncThunk(
   async (
     daat: {
       brandId: string;
-      sendData: { title: string; image: File; description: string };
+      sendData: { title: string; image: FileList | null; description: string };
     },
     { rejectWithValue }
   ) => {

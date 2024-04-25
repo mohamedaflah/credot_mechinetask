@@ -55,7 +55,7 @@ const brandReducer = createSlice({
           if (brand._id === payload.brand._id) {
             return payload.brand;
           } else {
-            brand;
+            return brand;
           }
         }) as Brand[];
         state.err = false;

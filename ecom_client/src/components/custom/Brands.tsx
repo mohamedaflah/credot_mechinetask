@@ -1,8 +1,7 @@
 import HeaderIcon from "./HeaderIcon";
 import leftIco from "../../assets/lefft-.svg";
 import rightIco from "../../assets/right-.svg";
-import AppleLogo from "../../assets/AppleBrand.png";
-import RealmeLogo from "../../assets/realme.png";
+
 import { useEffect, useRef } from "react";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
