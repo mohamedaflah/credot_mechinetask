@@ -1,5 +1,5 @@
 import { Header } from "./components/common/Header";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingePage";
 import Footer from "./components/common/Footer";
 import "./App.css";
@@ -9,22 +9,60 @@ import Cart from "./pages/Cart";
 import WhishList from "./pages/Whishlist";
 import { AdminLayout } from "./pages/Admin/Layout/AdminLayout";
 import { ProductList } from "./pages/Admin/ProductList";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "./redux/store";
+import Signup from "./pages/Signup";
+import { useEffect } from "react";
+import { getUser } from "./redux/actions/users/getUserAction";
 function App() {
-  
+  const { user, role } = useSelector((state: RootState) => state.user);
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
   return (
     <main>
-      <Header />
+      {role !== "admin" && <Header />}
       <Routes>
-        <Route path="/" element={<LandingPage />} />   {/* Route for Landing page */}
-        <Route path="/login" element={<Login />} />  {/*  Login and Register */}
-        <Route path="/product/:id" element={<Detail />} />  {/* Product detail page  */}
-        <Route path='/cart' element={<Cart/>} />  {/*  Cart page */}
-        <Route path='/whishlist' element={<WhishList/>}/>  {/* Whish list page */}
-        <Route path="/admin/" element={<AdminLayout/>}>
-          <Route index element={<ProductList/>}/>
+        <Route
+          path="/"
+          element={
+            role !== "admin" ? <LandingPage /> : <Navigate to={"/admin/"} />
+          }
+        />
+        {/* Route for Landing page */}
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to={"/"} />}
+        />{" "}
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to={"/"} />}
+        />
+        {/*  Login and Register */}
+        <Route path="/product/:id" element={<Detail />} />{" "}
+        {/* Product detail page  */}
+        <Route
+          path="/cart"
+          element={user ? <Cart /> : <Navigate to={"/"} />}
+        />{" "}
+        {/*  Cart page */}
+        <Route
+          path="/whishlist"
+          element={user ? <WhishList /> : <Navigate to={"/"} />}
+        />{" "}
+        {/* Whish list page */}
+        <Route
+          path="/admin/"
+          element={
+            user && role === "admin" ? <AdminLayout /> : <Navigate to={"/"} />
+          }
+        >
+          <Route index element={<ProductList />} />
         </Route>
       </Routes>
-      <Footer />
+      {role!=="admin"&&<Footer />}
+      
     </main>
   );
 }

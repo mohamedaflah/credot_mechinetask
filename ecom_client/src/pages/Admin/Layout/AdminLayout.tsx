@@ -3,8 +3,8 @@ import Logo from "@/assets/Logo@.svg";
 import { Box, Menu, Package2 } from "lucide-react";
 export function AdminLayout() {
   return (
-    <main className="h-screen flex gap-2  ">
-      <aside className="w-72 h-full bg-slate-100 px-3 rounded-sm">
+    <main className="h-screen flex gap-2 p-1 overflow-hidden  ">
+      <aside className="w-72 h-full bg-slate-100 px-3 rounded-sm ">
         <div className="w-full h-20  flex items-center justify-between">
           <img src={Logo} className="w-20" alt="" />
           <Menu className="w-5 cursor-pointer"/>
@@ -18,7 +18,7 @@ export function AdminLayout() {
           </Link>
         </div>
       </aside>
-      <section className="w-full h-full bg-slate-100 rounded-none p-2 ">
+      <section className="w-full h-full bg-slate-100 rounded-none p-5 ">
         <Outlet />
       </section>
     </main>

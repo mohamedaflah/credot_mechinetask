@@ -18,15 +18,19 @@ import {
 import { useState } from "react";
 import { Button } from "@/shad/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { ProfilePopover } from "../Popover";
 
 export const Header = () => {
   const [search, setSearch] = useState<boolean>(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
+  const { user } = useSelector((state: RootState) => state.user);
   return (
     <header className="w-full h-16 sm:h-20  flex items-center justify-center">
       <div className="w-[86%] sm:w-[80%] h-[80%]  flex justify-between items-center">
-        <div className="cursor-pointer" onClick={()=>navigate('/')}>
+        <div className="cursor-pointer" onClick={() => navigate("/")}>
           <img src={Logo} className="h-8 sm:h-10" />
         </div>
         <div className="hidden md:flex justify-between md:w-2/3 lg:w-1/2  h-[70%]">
@@ -41,9 +45,24 @@ export const Header = () => {
             </div>
           </div>
           <div className="h-full  w-48  border-l border[#EBEBEB] flex items-center justify-end gap-2">
-            <div className="h-full border-r px-2" onClick={()=>navigate('/login')}>
-              <HeaderIcon Image={User} />
-            </div>
+            {!user ? (
+              <div
+                className="h-full border-r px-2"
+                onClick={() => {
+                  if (!user) {
+                    navigate("/login");
+                  }
+                }}
+              >
+                <HeaderIcon Image={User} />
+              </div>
+            ) : (
+              <div
+                className="h-full border-r px-2"
+              >
+                <ProfilePopover/>
+              </div>
+            )}
             <HeaderIcon Image={Cart} />
           </div>
         </div>

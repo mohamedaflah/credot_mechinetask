@@ -2,7 +2,7 @@ import { ListFilter } from "lucide-react";
 
 export function ProductList() {
   return (
-    <main className="w-full h-full px-5 space-y-3">
+    <main className="w-full h-full px-5 space-y-5">
       <div className="w-full flex justify-between">
         <div className="">
           <h1>Product listing</h1>
@@ -23,6 +23,11 @@ export function ProductList() {
             <span>Filter</span>
           </div>
         </div>
+      </div>
+      <div className="w-full flex justify-end">
+        <button className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white">
+          Add new product
+        </button>
       </div>
       <div className="w-full h-full  ">
         <div className="flex flex-col border rounded-sm">
@@ -71,7 +76,7 @@ export function ProductList() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    <tr>
+                    <tr className="cursor-pointer">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                         Joe Black
                       </td>

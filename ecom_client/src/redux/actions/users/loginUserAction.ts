@@ -1,13 +1,16 @@
 import { CustomAxios } from "@/constants/axiosInstance";
-import { User } from "@/dev/types/User/user.type";
 import { handleErrors } from "@/util/handleError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const userSignupAction = createAsyncThunk(
-  "user/signp",
-  async (sendPayload: User, { rejectWithValue }) => {
+// /login
+export const userLoginAction = createAsyncThunk(
+  "user/login",
+  async (
+    sendData: { email: string; password: string },
+    { rejectWithValue }
+  ) => {
     try {
-      const { data } = await CustomAxios.post(`/api/v1/user/user`, sendPayload);
+      const { data } = await CustomAxios.post(`/api/v1/user/login`, sendData);
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));
