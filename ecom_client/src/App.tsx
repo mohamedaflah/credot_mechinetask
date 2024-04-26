@@ -49,7 +49,7 @@ function App() {
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}
         <Route
-          path="/cart"
+          path="/cart/:userId"
           element={user ? <Cart /> : <Navigate to={"/"} />}
         />{" "}
         {/*  Cart page */}

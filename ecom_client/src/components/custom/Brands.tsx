@@ -23,12 +23,12 @@ export default function Brands() {
       <div className=" w-[86%] sm:w-[80%] mx-auto">
         <h1 className="font-semibold text-lg">Top Brands</h1>
       </div>
-      <div className="w-[98%] sm:w-[90%]  mx-auto mt-5  flex h-28 items-center py-4 gap-2 md:py-2">
+      <div className="w-[98%] sm:w-[90%]  mx-auto mt-5  flex min-h-28 items-center py-4 gap-2 md:py-2">
         <div onClick={() => handleScrolling(-400)}>
           <HeaderIcon Image={leftIco} className="p-1 w-8 h-8" />
         </div>
         <div
-          className="scrollbarDiv overflow-x-auto h-full flex space-x-2 md:space-x-10 w-full md:w-[90%] mx-auto transition-shadow scroll-smooth whitespace-nowrap "
+          className="scrollbarDiv overflow-x-auto h-full flex lg:space-x-2 space-x-4 md:space-x-10 w-full md:w-[90%] mx-auto transition-shadow scroll-smooth whitespace-nowrap "
           id="scrollable"
           ref={scrollAreaRef}
         >
@@ -36,7 +36,7 @@ export default function Brands() {
             <img
               src={brand.image}
               alt=""
-              className="size-20 rounded-full object-cover"
+              className="lg:size-20 size-14 rounded-full object-cover"
             />
           ))}
         </div>

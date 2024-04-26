@@ -5,6 +5,7 @@ import { IoCheckmark } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 function DetailFunctions() {
   const { selectedProduct, selectedVarient } = useSelector(
@@ -12,6 +13,7 @@ function DetailFunctions() {
   );
 
   const [searchParam, setSearchParam] = useSearchParams();
+  const [qty, setQty] = useState<number>(1);
   const handleColorClick = (varientId: string) => {
     const param = new URLSearchParams(searchParam);
     param.set("varient", varientId);
@@ -76,7 +78,9 @@ function DetailFunctions() {
       </div>
       <div>
         <div className="flex gap-1 mt-4 text-lg items-center">
-          <span className="text-sm font-semibold">Internal memmory</span>
+          {!selectedVarient?.memory && selectedVarient?.memory !== "" && (
+            <span className="text-sm font-semibold">Internal memmory</span>
+          )}
         </div>
         <div className="flex mt-2 gap-2 md:gap-2">
           {selectedProduct?.variants
@@ -85,19 +89,26 @@ function DetailFunctions() {
                 self.findIndex((v) => v.memory === variant.memory) === index
             ) // Filter unique memory values
             .map((variant) => (
-              <div
-                key={variant._id}
-                onClick={()=>handleColorClick(String(variant?._id))}
-                className={`w-full ${selectedVarient?.memory===variant.memory&&"bg-black text-white border-none"} md:w-24 h-10 rounded-sm border cursor-pointer border-[#DCDCDC] flex items-center justify-center text-sm`}
-              >
-                {variant.memory}
-              </div>
+              <>
+                {variant.memory && variant.memory !== "" && (
+                  <div
+                    key={variant._id}
+                    onClick={() => handleColorClick(String(variant?._id))}
+                    className={`w-full ${
+                      selectedVarient?.memory === variant.memory &&
+                      "bg-black text-white border-none"
+                    } md:w-24 h-10 rounded-sm border cursor-pointer border-[#DCDCDC] flex items-center justify-center text-sm`}
+                  >
+                    {variant.memory}
+                  </div>
+                )}
+              </>
             ))}
         </div>
       </div>
       <div>
         <div className="flex mt-4 gap-5 justify-between py-4 border-t border-b border-[#DCDCDC] md:justify-start">
-          <QuantityButton />
+          <QuantityButton setQty={setQty} qty={qty} stock={Number(selectedVarient?.stock)} />
           <button className="h-10 bg-black w-full text-sm rounded-sm text-white md:w-44">
             Add to cart
           </button>

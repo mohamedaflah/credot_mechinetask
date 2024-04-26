@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { ProfilePopover } from "../Popover";
+import toast from "react-hot-toast";
 
 export const Header = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -57,13 +58,21 @@ export const Header = () => {
                 <HeaderIcon Image={User} />
               </div>
             ) : (
-              <div
-                className="h-full border-r px-2"
-              >
-                <ProfilePopover/>
+              <div className="h-full border-r px-2">
+                <ProfilePopover />
               </div>
             )}
-            <HeaderIcon Image={Cart} />
+            <HeaderIcon
+              Image={Cart}
+              onClick={() => {
+                if (!user) {
+                  toast.error("Please login to access cart")
+                  navigate('login')
+                } else {
+                  navigate(`/cart/${user?._id}`);
+                }
+              }}
+            />
           </div>
         </div>
         <div className="md:hidden text-3xl cursor-pointer">

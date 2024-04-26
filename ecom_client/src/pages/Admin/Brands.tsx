@@ -84,7 +84,7 @@ export function BrandPage() {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                             <img
                               src={brand?.image}
-                              className="size-10 rounded-full object-cover"
+                              className="size-10 rounded-full object-contain"
                               alt=""
                             />
                           </td>

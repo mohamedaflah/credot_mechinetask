@@ -8,6 +8,7 @@ export const store = configureStore({
     user: userReducer,
     brand: brandReducer,
     product: productReducer,
+    
   },
 });
 
