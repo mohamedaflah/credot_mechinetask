@@ -18,6 +18,7 @@ import { CategoryPage } from "./pages/Admin/Categories";
 import { BrandPage } from "./pages/Admin/Brands";
 import { UsersPage } from "./pages/Admin/Users";
 import { AddProduct } from "./pages/Admin/AddProduct";
+import { VarientList } from "./pages/Admin/VarientLlist";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -67,6 +68,7 @@ function App() {
           <Route path="brands" element={<BrandPage/>} />
           <Route path="users" element={<UsersPage/>}/>
           <Route path="addproduct" element={<AddProduct/>}/>
+          <Route path="varient/:productId" element={<VarientList/>} />
         </Route>
       </Routes>
       {role!=="admin"&&<Footer />}

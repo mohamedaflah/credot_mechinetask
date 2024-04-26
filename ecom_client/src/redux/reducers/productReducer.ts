@@ -4,6 +4,7 @@ import { addProductAction } from "../actions/product/addProductAction";
 import { ErrorPayload } from "@/dev/types/Common/ErroInterface";
 import toast from "react-hot-toast";
 import { getAllProductAction } from "../actions/product/getAllProductAction";
+import { getAllVarients } from "../actions/product/Varients/getAllVarientsAction";
 
 const initialState: ProductReducer = {
   loading: false,
@@ -41,6 +42,18 @@ const productReducer = createSlice({
         state.err = false;
       })
       .addCase(getAllProductAction.rejected, (state, { payload }) => {
+        state.err = (payload as ErrorPayload).message;
+        state.loading = false;
+      })
+      .addCase(getAllVarients.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(getAllVarients.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.varients = payload.products.variants;
+        state.err = false;
+      })
+      .addCase(getAllVarients.rejected, (state, { payload }) => {
         state.err = (payload as ErrorPayload).message;
         state.loading = false;
       });

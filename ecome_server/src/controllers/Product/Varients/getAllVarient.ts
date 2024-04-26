@@ -8,10 +8,15 @@ export const getAllVarients = async (
 ) => {
   try {
     const { productId } = req.params;
-    const products = await ProductModel.find({ _id: productId });
+    const { type } = req.query;
+    const products = await ProductModel.find(
+      { _id: productId },
+      { variants: true }
+    );
+    console.log("🚀 ~ products:", products)
     res
       .status(200)
-      .json({ status: true, message: "Successful", products: products });
+      .json({ status: true, message: "Successful", products: products[0] });
   } catch (error) {
     next(error);
   }

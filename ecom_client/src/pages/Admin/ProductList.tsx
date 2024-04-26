@@ -12,6 +12,10 @@ export function ProductList() {
   useEffect(() => {
     dispatch(getAllProductAction("admin"));
   }, [dispatch]);
+
+  const handleNavigation = (id: string) => {
+    navigate(`varient/${id}`);
+  };
   const { products } = useSelector((state: RootState) => state.product);
   return (
     <main className="w-full h-full px-5 space-y-5">
@@ -92,10 +96,18 @@ export function ProductList() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {products?.map((product) => (
-                      <tr key={product?._id} className="cursor-pointer">
+                      <tr
+                        key={product?._id}
+                        className="cursor-pointer"
+                        onClick={()=>handleNavigation(String(product._id))}
+                      >
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center">
                           {product && product.variants && (
-                            <img src={product?.variants[0]?.images[0]} className="h-8 w-7 object-cover" alt="" />
+                            <img
+                              src={product?.variants[0]?.images[0]}
+                              className="h-8 w-7 object-cover"
+                              alt=""
+                            />
                           )}
                           {product?.productName}
                         </td>
