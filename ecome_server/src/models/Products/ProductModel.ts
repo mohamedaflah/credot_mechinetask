@@ -7,6 +7,7 @@ const ProductModel = new mongoose.Schema(
     category: String,
     brand: mongoose.Types.ObjectId,
     slug: String,
+    
     variants: [
       {
         description: String,

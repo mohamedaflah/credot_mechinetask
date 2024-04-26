@@ -7,6 +7,8 @@ import { errorHandler } from "./middlewares/errorHandler";
 import userRouter from "./routers/users/userRoute";
 import brandRouter from "./routers/brand/brandRoute";
 
+import productRouter from "./routers/Product/ProductRoute";
+
 const app: Application = express();
 
 const corsOptions = {
@@ -19,10 +21,10 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 
-
 app.use(`/api/v1/user`, userRouter); // user router
-app.use(`/api/v1/brand`,brandRouter)
+app.use(`/api/v1/brand`, brandRouter);
+app.use(`/api/v1/product`, productRouter);
 
 app.use(errorHandler); // common error handler middleware
 
-app.listen(Number(process.env.PORT), async() => console.log(`Server started`));
+app.listen(Number(process.env.PORT), async () => console.log(`Server started`));

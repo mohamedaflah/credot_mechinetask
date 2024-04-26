@@ -10,7 +10,27 @@ export const getAllProduct = async (
     const { type } = req.query;
     let products;
     if (type === "admin") {
-      products = await ProductModel.find();
+      products = await ProductModel.aggregate([
+        {
+          $lookup: {
+            from: "brands",
+            localField: "brand",
+            foreignField: "_id",
+            as: "result",
+          },
+        },
+        {
+          $unwind: "$result",
+        },
+        {
+          $set: {
+            brand: {$concat:["$result.title","[(*)]","$result.image"]},
+          },
+        },
+        {
+          $project: { result: false },
+        },
+      ]);
     } else {
       products = await ProductModel.aggregate([
         { $match: { "variants.status": "publish" } },
@@ -34,7 +54,9 @@ export const getAllProduct = async (
         },
       ]);
     }
-    res.status(200).json({ status: true, message: "successfull" });
+    console.log(" Products ", products);
+
+    res.status(200).json({ status: true, message: "successfull", products });
   } catch (error) {
     next(error);
   }
