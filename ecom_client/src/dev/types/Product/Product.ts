@@ -6,8 +6,8 @@ export interface Product {
   slug?: string;
   _id?: string;
   variants?: Variant[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface Variant {

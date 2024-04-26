@@ -41,7 +41,7 @@ export function VarientList() {
         <div className="w-full flex justify-end">
           <button
             className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white"
-            onClick={() => navigate("addproduct")}
+            onClick={() => navigate(`/admin/addvarient/${productId}`)}
           >
             Add Varient
           </button>
@@ -109,11 +109,13 @@ export function VarientList() {
                         <tr key={varient?._id} className="cursor-pointer">
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 items-center flex gap-2 items-center">
                             {varient && varient.images && (
-                              <img
-                                src={varient?.images[0]}
-                                className="h-8 w-7 object-cover"
-                                alt=""
-                              />
+                              <div className="w-full flex justify-center">
+                                <img
+                                  src={varient?.images[0]}
+                                  className="h-8 w-7 object-cover"
+                                  alt=""
+                                />
+                              </div>
                             )}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
