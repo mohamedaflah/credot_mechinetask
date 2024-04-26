@@ -1,6 +1,8 @@
 import { ListFilter } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function ProductList() {
+  const navigate=useNavigate()
   return (
     <main className="w-full h-full px-5 space-y-5">
       <div className="w-full flex justify-between">
@@ -25,7 +27,7 @@ export function ProductList() {
         </div>
       </div>
       <div className="w-full flex justify-end">
-        <button className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white">
+        <button className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white" onClick={()=>navigate('addproduct')}>
           Add new product
         </button>
       </div>

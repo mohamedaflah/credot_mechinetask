@@ -19,4 +19,7 @@ export interface Variant {
   color: string;
   memory: string;
   status: "publish" | "unpublish";
+  specifications: string[];
+  modelNumber: string;
+  releasedDate: Date;
 }

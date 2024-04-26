@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const ProductModel = new mongoose.Schema(
   {
-    productName: String,
+    productName: { type: String, unique: true },
     tag: String,
-    category: mongoose.Types.ObjectId,
+    category: String,
     brand: mongoose.Types.ObjectId,
     slug: String,
     variants: [
@@ -21,6 +21,9 @@ const ProductModel = new mongoose.Schema(
           type: String,
           enum: ["publish", "unpublish"],
         },
+        specifications: [String],
+        modelNumber: String,
+        releasedDate: Date,
       },
     ],
   },

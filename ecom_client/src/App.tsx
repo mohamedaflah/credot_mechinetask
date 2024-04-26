@@ -17,6 +17,7 @@ import { getUser } from "./redux/actions/users/getUserAction";
 import { CategoryPage } from "./pages/Admin/Categories";
 import { BrandPage } from "./pages/Admin/Brands";
 import { UsersPage } from "./pages/Admin/Users";
+import { AddProduct } from "./pages/Admin/AddProduct";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
           <Route path="categories" element={<CategoryPage/>} />
           <Route path="brands" element={<BrandPage/>} />
           <Route path="users" element={<UsersPage/>}/>
+          <Route path="addproduct" element={<AddProduct/>}/>
         </Route>
       </Routes>
       {role!=="admin"&&<Footer />}
