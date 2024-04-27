@@ -25,12 +25,13 @@ export function AddressForm() {
       street: "",
     },
   });
+  console.log("Form Errors:", errors); // Add this line to log errors
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const {loading}=useSelector((state:RootState)=>state.order)
   const navigate = useNavigate();
   const handleAddressForm = (values: z.infer<typeof addressSchema>) => {
-    values;
     let totalAmount: number = 0;
     const products = cart?.map((cart) => {
       totalAmount += cart.qty * Number(cart?.productDetails?.variant?.price);
@@ -61,7 +62,7 @@ export function AddressForm() {
       onSubmit={handleSubmit(handleAddressForm)}
     >
       <div className="w-full flex flex-col items-start">
-        <label htmlFor="state">state</label>
+        <label htmlFor="state">street</label>
         <Input
           type="text"
           className="w-full text-sm"
@@ -70,6 +71,18 @@ export function AddressForm() {
         />
         <p className="h-[12px] text-red-400">
           {errors && errors.street?.message}
+        </p>
+      </div>
+      <div className="w-full flex flex-col items-start">
+        <label htmlFor="state">state</label>
+        <Input
+          type="text"
+          className="w-full text-sm"
+          placeholder="Enter street"
+          onChange={(e) => setValue("state", e.target.value)}
+        />
+        <p className="h-[12px] text-red-400">
+          {errors && errors.state?.message}
         </p>
       </div>
       <div className="w-full flex flex-col items-start">
@@ -131,7 +144,7 @@ export function AddressForm() {
         </p>
       </div>
       <div className="w-full">
-        <LoaderButton loading={false} className="w-full">
+        <LoaderButton loading={loading} className="w-full">
           Submit
         </LoaderButton>
       </div>

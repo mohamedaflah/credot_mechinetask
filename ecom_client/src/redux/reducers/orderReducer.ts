@@ -28,6 +28,7 @@ const orderReducer = createSlice({
       .addCase(createOrder.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
+        toast.error(state.err)
         
       });
   },

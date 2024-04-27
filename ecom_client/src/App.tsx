@@ -46,7 +46,7 @@ function App() {
           path="/signup"
           element={!user ? <Signup /> : <Navigate to={"/"} />}
         />
-        <Route path="/order-success" element={<OrderSucess />} />
+        <Route path="/order-success" element={user?<OrderSucess />:<Navigate to={"/"}/>} />
         {/*  Login and Register */}
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}
