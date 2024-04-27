@@ -4,14 +4,16 @@ import QuantityButton from "../common/Qtybutton";
 import { IoCheckmark } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { addToCartAction } from "@/redux/actions/cart/addTocart";
+import toast from "react-hot-toast";
 
 function DetailFunctions() {
   const { selectedProduct, selectedVarient } = useSelector(
     (state: RootState) => state.product
   );
+  const { cartproducts } = useSelector((state: RootState) => state.cart);
 
   const [searchParam, setSearchParam] = useSearchParams();
   const [qty, setQty] = useState<number>(1);
@@ -23,7 +25,15 @@ function DetailFunctions() {
   const dispatch: AppDispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.cart);
   const { user } = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
   const handleAddtocart = () => {
+    if (!user) {
+      toast.error("pleaes login or create account");
+      return navigate("/login");
+    }
+    if(cartproducts?.includes(String(selectedVarient?._id))){
+      return navigate(`/cart/${user?._id}`)
+    }
     // addToCartAction
     dispatch(
       addToCartAction({
@@ -130,10 +140,14 @@ function DetailFunctions() {
           <button
             className={`h-10 bg-black ${
               loading && "bg-gray-900 pointer-events-none"
-            } w-full text-sm rounded-sm text-white md:w-44`}
+            } w-full text-sm rounded-sm text-white md:w-44 `}
             onClick={handleAddtocart}
           >
-            {loading ? "Processing..." : "Add to cart"}
+            {cartproducts?.includes(String(selectedVarient?._id)) ? (
+              "Go to cart"
+            ) : (
+              <>{loading ? "Processing..." : "Add to cart"}</>
+            )}
           </button>
         </div>
         <div className="flex gap-2 items-center mt-3">

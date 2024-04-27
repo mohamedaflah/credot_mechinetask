@@ -1,5 +1,6 @@
 import DetailFunctions from "@/components/custom/DetailFunctions";
 import ProductDetail from "@/components/custom/Pdetails";
+import { getCartProductIds } from "@/redux/actions/cart/getCartProductIds";
 // import ProductCard from "@/components/custom/ProductCard";
 import { getProductAndVarient } from "@/redux/actions/product/getProductAnVarient";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -13,6 +14,7 @@ function Detail() {
   const [searchParam, _] = useSearchParams();
   const dispatch: AppDispatch = useDispatch();
   const { selectedVarient } = useSelector((state: RootState) => state.product);
+  const { user } = useSelector((state: RootState) => state.user);
   useEffect(() => {
     const param = new URLSearchParams(searchParam);
 
@@ -22,7 +24,8 @@ function Detail() {
         varientId: String(param.get("varient")),
       })
     );
-  }, [dispatch, productId, searchParam]);
+    dispatch(getCartProductIds(String(user?._id)));
+  }, [dispatch, productId, searchParam, user?._id]);
   return (
     <main>
       <div className="flex flex-col w-[85%] md:w-[80%] justify-center mx-auto">

@@ -4,6 +4,9 @@ import { addToCartAction } from "../actions/cart/addTocart";
 import toast from "react-hot-toast";
 import { ErrorPayload } from "@/dev/types/Common/ErroInterface";
 import { getAllProductsinCart } from "../actions/cart/getAllProductIncart";
+import { updateCartAction } from "../actions/cart/updateCart";
+import { deleteCartAction } from "../actions/cart/deleteCartAction";
+import { getCartProductIds } from "../actions/cart/getCartProductIds";
 
 const initialState: CartInitial = {
   loading: false,
@@ -42,6 +45,41 @@ const cartReducer = createSlice({
       .addCase(getAllProductsinCart.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
+      })
+      .addCase(updateCartAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateCartAction.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.cart = payload.cart;
+        toast.success(payload.message);
+      })
+      .addCase(updateCartAction.rejected, (state, { payload }) => {
+        state.err = (payload as ErrorPayload).message;
+        toast.error(state.err);
+      })
+      .addCase(deleteCartAction.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(deleteCartAction.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.cart = payload.cart;
+      })
+      .addCase(deleteCartAction.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
+      })
+      .addCase(getCartProductIds.pending, (state) => {
+        state.loading = false;
+      })
+      .addCase(getCartProductIds.fulfilled, (state, { payload }) => {
+        state.cartproducts = payload.products;
+        state.loading = false;
+        state.err = false;
+      })
+      .addCase(getCartProductIds.rejected, (state, { payload }) => {
+        state.err = (payload as ErrorPayload).message;
+        state.loading = false;
       });
   },
 });

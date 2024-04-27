@@ -1,7 +1,7 @@
 import CartRow from "@/components/custom/cartRow";
 import { getAllProductsinCart } from "@/redux/actions/cart/getAllProductIncart";
 import { AppDispatch, RootState } from "@/redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -12,6 +12,21 @@ function Cart() {
     dispatch(getAllProductsinCart({ userId: String(userId) }));
   }, [dispatch, userId]);
   const { cart } = useSelector((state: RootState) => state.cart);
+  const [total, setTotal] = useState<number>();
+  useEffect(() => {
+    let total = 0; // Initialize total to 0
+    if (cart) {
+      cart?.forEach((val) => { // Using forEach for more appropriate semantics since you don't need the result of the map operation
+        if (val && val.productDetails && val.productDetails.variant) {
+          total += val.qty * val.productDetails.variant.price; // Use += to add to the total
+        }
+      });
+    }
+    if (total > 0) { // Check if total is greater than 0 to set the state
+      setTotal(total);
+    }
+  }, [cart]); // Ensure cart is listed as a dependency of useEffect
+  
   return (
     <main>
       <header className="w-full bg-[#F9F9F9] flex justify-center items-center h-20">
@@ -80,13 +95,13 @@ function Cart() {
                 <div className="flex justify-between  w-full mt-5 border-b h-10 border-[#DFDCDC] items-start">
                   <span>Subtotal</span>
                   <span className="text-sm uppercase ">
-                    <span>OMR 107.00</span>
+                    <span>OMR {total}</span>
                   </span>
                 </div>
                 <div className="flex justify-between  w-full mt-5  ">
                   <span>Total</span>
                   <span className="text-lg uppercase font-bold">
-                    <span>OMR 107.00</span>
+                    <span>OMR {total}</span>
                   </span>
                 </div>
                 <button className="w-full h-10 bg-[#1AA5C3]  text-sm uppercase text-white ">

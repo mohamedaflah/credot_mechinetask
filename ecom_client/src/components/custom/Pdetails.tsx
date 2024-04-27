@@ -34,13 +34,13 @@ export default function ProductDetail() {
             {index > 0 && (
               <div
                 key={img}
-                className="h-[92%] bg-[#F9F9F9] w-28 inline-block relative"
+                className="h-[92%] bg-[#F9F9F9] size-28 inline-block relative"
                 onClick={() => handleImageChange(index)}
               >
                 <img
                   src={img}
                   alt="Ig"
-                  className="absolute size-24 object-cover top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
+                  className="absolute size-24 object-contain top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]"
                 />
               </div>
             )}
