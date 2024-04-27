@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "@/redux/actions/order/createOrderAciton";
 import { useNavigate } from "react-router-dom";
+import { setCartEmpty } from "@/redux/reducers/cartReducer";
 
 export function AddressForm() {
   const {
@@ -29,7 +30,7 @@ export function AddressForm() {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const { cart } = useSelector((state: RootState) => state.cart);
-  const {loading}=useSelector((state:RootState)=>state.order)
+  const { loading } = useSelector((state: RootState) => state.order);
   const navigate = useNavigate();
   const handleAddressForm = (values: z.infer<typeof addressSchema>) => {
     let totalAmount: number = 0;
@@ -52,6 +53,7 @@ export function AddressForm() {
       })
     ).then((res) => {
       if (res.type.endsWith("fulfilled")) {
+        dispatch(setCartEmpty());
         navigate("/order-success");
       }
     });
@@ -151,5 +153,3 @@ export function AddressForm() {
     </form>
   );
 }
-
-
