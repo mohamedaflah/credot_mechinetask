@@ -11,7 +11,7 @@ export const createNewOrder = async (
     const Order = new OrderModel(req.body);
     await Order.save();
     await CartModel.deleteOne({ userId: req.body.userId });
-
+    
     res
       .status(200)
       .json({ status: true, message: "Order created", order: Order });

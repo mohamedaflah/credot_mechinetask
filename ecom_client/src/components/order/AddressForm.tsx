@@ -53,7 +53,7 @@ export function AddressForm() {
       })
     ).then((res) => {
       if (res.type.endsWith("fulfilled")) {
-        dispatch(setCartEmpty());
+        dispatch(setCartEmpty())
         navigate("/order-success");
       }
     });

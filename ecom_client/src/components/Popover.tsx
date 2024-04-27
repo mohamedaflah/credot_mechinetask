@@ -22,11 +22,11 @@ export const ProfilePopover = () => {
       <PopoverTrigger className="p-0  ">
         <HeaderIcon Image={User} />
       </PopoverTrigger>
-      <PopoverContent className="bg-slate-200 mt-2 min-w-36 min-h-[200px] z-10 p-2 rounded-md">
+      <PopoverContent className="bg-white border-2 mt-2 min-w-36 min-h-[200px] z-10 p-2 rounded-md">
         <div className="w-full h-10 font-semibold font-sans ">{user?.name}</div>
         <div className="w-full px-2 flex flex-col gap-2">
           <Link
-            to={"/"}
+            to={"/orders/:userId"}
             className="border border-gray-100 border-r-0 border-l-0 p-1 text-sm"
           >
             Orders

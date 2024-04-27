@@ -21,6 +21,7 @@ import { AddProduct } from "./pages/Admin/AddProduct";
 import { VarientList } from "./pages/Admin/VarientLlist";
 import { AddVarient } from "./pages/Admin/AddVarient";
 import { OrderSucess } from "./pages/OrderSucces";
+import { Orders } from "./pages/Order";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -51,6 +52,7 @@ function App() {
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}
         <Route path="/cart/:userId" element={<Cart />} /> {/*  Cart page */}
+        <Route path="/orders" element={<Orders />} /> {/*  order page */}
         <Route
           path="/whishlist"
           element={user ? <WhishList /> : <Navigate to={"/"} />}

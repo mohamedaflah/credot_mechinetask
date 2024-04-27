@@ -5,48 +5,83 @@ export const getOrdersByUserId = async (userId: string) => {
   try {
     const orders = await OrderModel.aggregate([
       {
-        $match: { userId:new mongoose.Types.ObjectId(userId) },
+        $match: { userId: new mongoose.Types.ObjectId(userId) }, // Match orders by userId
+      },
+      {
+        $unwind: "$products", // Deconstruct the products array
       },
       {
         $lookup: {
-          from: "products", // Assuming your products collection name is "products"
-          localField: "products.productId",
-          foreignField: "_id",
-          as: "productDetails",
+          from: "products", // Lookup in the products collection
+          let: { productId: "$products.productId" }, // Define a variable to store productId
+          pipeline: [
+            {
+              $unwind: "$variants", // Deconstruct the variants array
+            },
+            {
+              $match: { $expr: { $eq: ["$variants._id", "$$productId"] } }, // Match variants by _id
+            },
+            {
+              $project: {
+                // Project the necessary fields
+                productName: 1,
+                category: 1,
+                brand: 1,
+                slug: 1,
+                variant: "$variants",
+              },
+            },
+          ],
+          as: "products.productDetails", // Populate product details in a new field
+        },
+      },
+      {
+        $unwind: "$products.productDetails", // Deconstruct the productDetails array
+      },
+      {
+        $lookup: {
+          from: "brands", // Lookup in the brands collection
+          localField: "products.productDetails.brand", // Field from ProductModel
+          foreignField: "_id", // Field from BrandModel
+          as: "products.productDetails.brandDetails", // Populate brand details in a new field
+        },
+      },
+      {
+        $unwind: "$products.productDetails.brandDetails",
+      },
+      {
+        $set: {
+          "products.productDetails.brand": {
+            $concat: [
+              "$products.productDetails.brandDetails.title",
+              "[(*)]",
+              "$products.productDetails.brandDetails.image",
+            ],
+          },
         },
       },
       {
         $project: {
-          _id: 1,
-          userId: 1,
-          paymentMode: 1,
-          status: 1,
-          totalAmount: 1,
-          address: 1,
-          products: {
-            $map: {
-              input: "$products",
-              as: "product",
-              in: {
-                productId: "$$product.productId",
-                qty: "$$product.qty",
-                price: "$$product.price",
-                productDetails: {
-                  $arrayElemAt: [
-                    {
-                      $filter: {
-                        input: "$productDetails",
-                        cond: { $eq: ["$$this._id", "$$product.productId"] },
-                      },
-                    },
-                    0,
-                  ],
-                },
-              },
-            },
-          },
+          "products.productDetails.brandDetails": false,
         },
       },
+      // {$concat:["$productDetails.brand.title","[(*)]","$productDetails.brand.image"]}
+      {
+        $group: {
+          _id: "$_id", // Group by order _id
+          userId: { $first: "$userId" }, // Keep userId
+          paymentMode: { $first: "$paymentMode" }, // Keep paymentMode
+          status: { $first: "$status" }, // Keep status
+          totalAmount: { $first: "$totalAmount" }, // Keep totalAmount
+          address: { $first: "$address" }, // Keep address
+          products: { $push: "$products" }, // Reconstruct the products array
+          createdAt: { $first: "$createdAt" },
+          updatedAt: { $first: "$updatedAt" },
+        },
+      },
+      {
+        $sort:{createdAt:-1}
+      }
     ]);
 
     return orders;

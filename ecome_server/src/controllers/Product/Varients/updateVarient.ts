@@ -20,6 +20,7 @@ export const updateVarient = async (
     );
 
     console.log("🚀 ~ updatedProduct:", updatedProduct);
+    res.status(200).json({status:true,message:"Succesfull",product:updatedProduct})
   } catch (error) {
     next(error);
   }

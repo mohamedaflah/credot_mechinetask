@@ -1,8 +1,9 @@
 import { Order } from "./Order";
+import { UserOrder } from "./userOrder";
 
 export interface OrderInitial {
   loading: boolean;
   err: boolean | string;
-  order: Order | null;
+  userorder: UserOrder[] | null;
   orders: Order[] | null;
 }

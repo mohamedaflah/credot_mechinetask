@@ -13,6 +13,7 @@ function DetailFunctions() {
   const { selectedProduct, selectedVarient } = useSelector(
     (state: RootState) => state.product
   );
+  const [gotoCart, setGotocart] = useState<boolean>(false);
   const { cartproducts } = useSelector((state: RootState) => state.cart);
 
   const [searchParam, setSearchParam] = useSearchParams();
@@ -31,8 +32,8 @@ function DetailFunctions() {
       toast.error("pleaes login or create account");
       return navigate("/login");
     }
-    if(cartproducts?.includes(String(selectedVarient?._id))){
-      return navigate(`/cart/${user?._id}`)
+    if (cartproducts?.includes(String(selectedVarient?._id))||gotoCart) {
+      return navigate(`/cart/${user?._id}`);
     }
     // addToCartAction
     dispatch(
@@ -41,7 +42,11 @@ function DetailFunctions() {
         qty: qty,
         userId: String(user?._id),
       })
-    );
+    ).then((res) => {
+      if (res.type.endsWith("fulfilled")) {
+        setGotocart(true);
+      }
+    });
   };
   return (
     <div className="w-full min-h-96 flex flex-col py-3 px-2 md:w-auto md:h-full md:py-0">
@@ -143,7 +148,7 @@ function DetailFunctions() {
             } w-full text-sm rounded-sm text-white md:w-44 `}
             onClick={handleAddtocart}
           >
-            {cartproducts?.includes(String(selectedVarient?._id)) ? (
+            {cartproducts?.includes(String(selectedVarient?._id))||gotoCart ? (
               "Go to cart"
             ) : (
               <>{loading ? "Processing..." : "Add to cart"}</>

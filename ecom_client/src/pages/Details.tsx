@@ -28,6 +28,7 @@ function Detail() {
   }, [dispatch, productId, searchParam, user?._id]);
   return (
     <main>
+      
       <div className="flex flex-col w-[85%] md:w-[80%] justify-center mx-auto">
         <div className="flex flex-col w-full md:grid md:grid-cols-2  ">
           <ProductDetail />
