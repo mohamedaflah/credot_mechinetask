@@ -1,4 +1,6 @@
+import { CustomeModal } from "@/components/custom/CustomeModa";
 import CartRow from "@/components/custom/cartRow";
+import { AddressForm } from "@/components/order/AddressForm";
 import { getAllProductsinCart } from "@/redux/actions/cart/getAllProductIncart";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -16,17 +18,19 @@ function Cart() {
   useEffect(() => {
     let total = 0; // Initialize total to 0
     if (cart) {
-      cart?.forEach((val) => { // Using forEach for more appropriate semantics since you don't need the result of the map operation
+      cart?.forEach((val) => {
+        // Using forEach for more appropriate semantics since you don't need the result of the map operation
         if (val && val.productDetails && val.productDetails.variant) {
           total += val.qty * val.productDetails.variant.price; // Use += to add to the total
         }
       });
     }
-    if (total > 0) { // Check if total is greater than 0 to set the state
+    if (total > 0) {
+      // Check if total is greater than 0 to set the state
       setTotal(total);
     }
   }, [cart]); // Ensure cart is listed as a dependency of useEffect
-  
+
   return (
     <main>
       <header className="w-full bg-[#F9F9F9] flex justify-center items-center h-20">
@@ -78,7 +82,7 @@ function Cart() {
                     placeholder="Apply coupon"
                     className="h-full w-full text-[12px] md:text-sm p-3 outline-none"
                   />
-                  <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black" >
+                  <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
                     apply coupon
                   </button>
                 </div>
@@ -104,9 +108,15 @@ function Cart() {
                     <span>OMR {total}</span>
                   </span>
                 </div>
-                <button className="w-full h-10 bg-[#1AA5C3]  text-sm uppercase text-white ">
-                  Proceed to checkout
-                </button>
+                <CustomeModal title="Complete address"
+                  trigger={
+                    <button className="w-full h-10 bg-[#1AA5C3]  text-sm uppercase text-white ">
+                      Proceed to checkout
+                    </button>
+                  }
+                >
+                  <AddressForm />
+                </CustomeModal>
               </div>
             </div>
           </div>
