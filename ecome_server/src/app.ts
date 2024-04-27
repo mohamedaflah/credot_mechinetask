@@ -9,6 +9,7 @@ import brandRouter from "./routers/brand/brandRoute";
 
 import productRouter from "./routers/Product/ProductRoute";
 import cartRouter from "./routers/cart/cartRouter";
+import orderRoute from "./routers/Order/orderRoute";
 
 const app: Application = express();
 
@@ -23,9 +24,10 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(`/api/v1/user`, userRouter); // user router
-app.use(`/api/v1/brand`, brandRouter);
-app.use(`/api/v1/product`, productRouter);
-app.use(`/api/v1/cart`, cartRouter);
+app.use(`/api/v1/brand`, brandRouter); // brand router
+app.use(`/api/v1/product`, productRouter); // product router
+app.use(`/api/v1/cart`, cartRouter); // cart router
+app.use(`/api/v1/order`, orderRoute); // order router
 
 app.use(errorHandler); // common error handler middleware
 
