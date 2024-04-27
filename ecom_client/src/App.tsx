@@ -48,11 +48,7 @@ function App() {
         {/*  Login and Register */}
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}
-        <Route
-          path="/cart/:userId"
-          element={user ? <Cart /> : <Navigate to={"/"} />}
-        />{" "}
-        {/*  Cart page */}
+        <Route path="/cart/:userId" element={<Cart />} /> {/*  Cart page */}
         <Route
           path="/whishlist"
           element={user ? <WhishList /> : <Navigate to={"/"} />}
@@ -65,16 +61,15 @@ function App() {
           }
         >
           <Route index element={<ProductList />} />
-          <Route path="categories" element={<CategoryPage/>} />
-          <Route path="brands" element={<BrandPage/>} />
-          <Route path="users" element={<UsersPage/>}/>
-          <Route path="addproduct" element={<AddProduct/>}/>
-          <Route path="varient/:productId" element={<VarientList/>} />
-          <Route path="addvarient/:productId" element={<AddVarient/>}/>
+          <Route path="categories" element={<CategoryPage />} />
+          <Route path="brands" element={<BrandPage />} />
+          <Route path="users" element={<UsersPage />} />
+          <Route path="addproduct" element={<AddProduct />} />
+          <Route path="varient/:productId" element={<VarientList />} />
+          <Route path="addvarient/:productId" element={<AddVarient />} />
         </Route>
       </Routes>
-      {role!=="admin"&&<Footer />}
-      
+      {role !== "admin" && <Footer />}
     </main>
   );
 }

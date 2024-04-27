@@ -58,7 +58,7 @@ function Cart() {
                 <input
                   type="text"
                   placeholder="Apply coupon"
-                  className="h-full w-full text-[12px] md:text-sm pl-3 outline-none"
+                  className="h-full w-full text-[12px] md:text-sm px-3 outline-none"
                 />
                 <button className="h-full text-[9px] w-56 md:text-[12px] line-clamp-1 uppercase text-white bg-black">
                   apply coupon
@@ -76,9 +76,9 @@ function Cart() {
                   <input
                     type="text"
                     placeholder="Apply coupon"
-                    className="h-full w-full text-[12px] md:text-sm pl-3 outline-none"
+                    className="h-full w-full text-[12px] md:text-sm p-3 outline-none"
                   />
-                  <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
+                  <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black" >
                     apply coupon
                   </button>
                 </div>

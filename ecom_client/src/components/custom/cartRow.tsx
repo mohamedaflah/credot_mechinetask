@@ -58,7 +58,7 @@ function CartRow({ cartData }: ChildProp) {
           </div>
           <img
             src={cartData.productDetails.variant?.images[0]}
-            className="size-12 object-cover"
+            className="size-12 object-contain"
             alt=""
           />
         </div>
