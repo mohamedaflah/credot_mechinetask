@@ -20,6 +20,7 @@ import { UsersPage } from "./pages/Admin/Users";
 import { AddProduct } from "./pages/Admin/AddProduct";
 import { VarientList } from "./pages/Admin/VarientLlist";
 import { AddVarient } from "./pages/Admin/AddVarient";
+import { OrderSucess } from "./pages/OrderSucces";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
           path="/signup"
           element={!user ? <Signup /> : <Navigate to={"/"} />}
         />
+        <Route path="/order-success" element={<OrderSucess />} />
         {/*  Login and Register */}
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}

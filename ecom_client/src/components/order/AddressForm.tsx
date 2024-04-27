@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { addressSchema } from "@/Schema/Order/addressSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "@/redux/actions/order/createOrderAciton";
+import { useNavigate } from "react-router-dom";
 
 export function AddressForm() {
   const {
@@ -21,8 +25,35 @@ export function AddressForm() {
       street: "",
     },
   });
+  const dispatch: AppDispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.user);
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const navigate = useNavigate();
   const handleAddressForm = (values: z.infer<typeof addressSchema>) => {
     values;
+    let totalAmount: number = 0;
+    const products = cart?.map((cart) => {
+      totalAmount += cart.qty * Number(cart?.productDetails?.variant?.price);
+      return {
+        productId: String(cart?.productDetails?.variant?._id),
+        qty: Number(cart?.qty),
+        price: Number(cart?.productDetails?.variant?.price),
+      };
+    });
+    dispatch(
+      createOrder({
+        userId: String(user?._id),
+        address: values,
+        paymentMode: "cod",
+        products: products,
+        status: "pending",
+        totalAmount: totalAmount,
+      })
+    ).then((res) => {
+      if (res.type.endsWith("fulfilled")) {
+        navigate("/order-success");
+      }
+    });
   };
   return (
     <form
@@ -108,11 +139,4 @@ export function AddressForm() {
   );
 }
 
-// export const addressSchema = z.object({
-//     place: z.string().min(2),
-//     street: z.string().min(2),
-//     state: z.string().min(2),
-//     pincode: z.string().min(6).max(6),
-//     phone: z.number(),
-//     email: z.string().email(),
-//   });
+

@@ -1,12 +1,14 @@
+import { OrderAxios } from "@/constants/axiosInstance";
 import { OrderPayload } from "@/dev/types/Order/ordrePayload";
 import { handleErrors } from "@/util/handleError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const createOrder = createAsyncThunk(
   "order/create-order",
-  (data: OrderPayload, { rejectWithValue }) => {
+  async (body: OrderPayload, { rejectWithValue }) => {
     try {
-        // const {}=await 
+      const { data } = await OrderAxios.post(`/order`, body);
+      return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));
     }

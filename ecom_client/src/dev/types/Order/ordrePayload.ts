@@ -3,7 +3,7 @@ export interface OrderPayload {
   paymentMode: "online" | "cod";
   status: "pending" | "shipped" | "delivered";
   totalAmount: number;
-  products: { productId: string; qty: number; price: number }[];
+  products: { productId: string; qty: number; price: number }[]|undefined;
   address: {
     place: string;
     street: string;
