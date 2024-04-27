@@ -12,3 +12,8 @@ export const ProductAxios = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}api/v1/product`,
   withCredentials: true,
 });
+
+export const CartAxios = axios.create({
+  baseURL: `${import.meta.env.VITE_SERVER_URL}api/v1/cart`,
+  withCredentials: true,
+});

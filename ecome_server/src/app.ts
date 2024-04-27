@@ -8,6 +8,7 @@ import userRouter from "./routers/users/userRoute";
 import brandRouter from "./routers/brand/brandRoute";
 
 import productRouter from "./routers/Product/ProductRoute";
+import cartRouter from "./routers/cart/cartRouter";
 
 const app: Application = express();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(`/api/v1/user`, userRouter); // user router
 app.use(`/api/v1/brand`, brandRouter);
 app.use(`/api/v1/product`, productRouter);
+app.use(`/api/v1/cart`, cartRouter);
 
 app.use(errorHandler); // common error handler middleware
 

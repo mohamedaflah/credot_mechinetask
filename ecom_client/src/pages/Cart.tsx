@@ -1,6 +1,17 @@
 import CartRow from "@/components/custom/cartRow";
+import { getAllProductsinCart } from "@/redux/actions/cart/getAllProductIncart";
+import { AppDispatch, RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 function Cart() {
+  const dispatch: AppDispatch = useDispatch();
+  const { userId } = useParams();
+  useEffect(() => {
+    dispatch(getAllProductsinCart({ userId: String(userId) }));
+  }, [dispatch, userId]);
+  const { cart } = useSelector((state: RootState) => state.cart);
   return (
     <main>
       <header className="w-full bg-[#F9F9F9] flex justify-center items-center h-20">
@@ -23,8 +34,10 @@ function Cart() {
                 <span className="text-sm uppercase">Sub total</span>
               </div>
             </div>
-            <CartRow />
-            <CartRow />
+            {cart?.map((cart) => (
+              <CartRow cartData={cart} />
+            ))}
+
             <div className="w-full h-12  lg:flex justify-between mt-4 hidden ">
               <div className="w-max h-full border border-[#DFDCDC] overflow-hidden flex">
                 <input

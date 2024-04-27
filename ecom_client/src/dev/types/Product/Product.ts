@@ -24,4 +24,5 @@ export interface Variant {
   specifications: string[];
   modelNumber: string;
   releasedDate: Date;
+  category?: string;
 }

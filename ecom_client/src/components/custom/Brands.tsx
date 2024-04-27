@@ -28,7 +28,7 @@ export default function Brands() {
           <HeaderIcon Image={leftIco} className="p-1 w-8 h-8" />
         </div>
         <div
-          className="scrollbarDiv overflow-x-auto h-full flex lg:space-x-2 space-x-4 md:space-x-10 w-full md:w-[90%] mx-auto transition-shadow scroll-smooth whitespace-nowrap "
+          className="scrollbarDiv gap-5 overflow-x-auto h-full flex lg:space-x-2 space-x-4 md:space-x-10 w-full md:w-[90%] mx-auto transition-shadow scroll-smooth whitespace-nowrap "
           id="scrollable"
           ref={scrollAreaRef}
         >

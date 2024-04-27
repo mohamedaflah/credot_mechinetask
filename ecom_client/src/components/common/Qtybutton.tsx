@@ -9,7 +9,7 @@ function QuantityButton({
 }: {
   className?: string;
   setQty?: React.Dispatch<React.SetStateAction<number>>;
-  stock: number;
+  stock?: number;
   qty: number;
 }) {
   return (
@@ -32,7 +32,7 @@ function QuantityButton({
       <div
         className="h-full flex items-center justify-center text-1xl w-full border-l border-[#DCDCDC] cursor-pointer"
         onClick={() => {
-          if (qty < stock) {
+          if (stock&&qty < stock) {
             setQty && setQty((prev) => prev + 1);
           }else{
             toast.error("Limit reached")

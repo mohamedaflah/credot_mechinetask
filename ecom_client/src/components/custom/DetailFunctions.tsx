@@ -2,10 +2,11 @@ import start from "../../assets/Vector.svg";
 import { IoMdHeartEmpty } from "react-icons/io";
 import QuantityButton from "../common/Qtybutton";
 import { IoCheckmark } from "react-icons/io5";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { addToCartAction } from "@/redux/actions/cart/addTocart";
 
 function DetailFunctions() {
   const { selectedProduct, selectedVarient } = useSelector(
@@ -18,6 +19,19 @@ function DetailFunctions() {
     const param = new URLSearchParams(searchParam);
     param.set("varient", varientId);
     setSearchParam(param);
+  };
+  const dispatch: AppDispatch = useDispatch();
+  const { loading } = useSelector((state: RootState) => state.cart);
+  const { user } = useSelector((state: RootState) => state.user);
+  const handleAddtocart = () => {
+    // addToCartAction
+    dispatch(
+      addToCartAction({
+        productId: String(selectedVarient?._id),
+        qty: qty,
+        userId: String(user?._id),
+      })
+    );
   };
   return (
     <div className="w-full min-h-96 flex flex-col py-3 px-2 md:w-auto md:h-full md:py-0">
@@ -108,9 +122,18 @@ function DetailFunctions() {
       </div>
       <div>
         <div className="flex mt-4 gap-5 justify-between py-4 border-t border-b border-[#DCDCDC] md:justify-start">
-          <QuantityButton setQty={setQty} qty={qty} stock={Number(selectedVarient?.stock)} />
-          <button className="h-10 bg-black w-full text-sm rounded-sm text-white md:w-44">
-            Add to cart
+          <QuantityButton
+            setQty={setQty}
+            qty={qty}
+            stock={Number(selectedVarient?.stock)}
+          />
+          <button
+            className={`h-10 bg-black ${
+              loading && "bg-gray-900 pointer-events-none"
+            } w-full text-sm rounded-sm text-white md:w-44`}
+            onClick={handleAddtocart}
+          >
+            {loading ? "Processing..." : "Add to cart"}
           </button>
         </div>
         <div className="flex gap-2 items-center mt-3">
