@@ -45,7 +45,7 @@ export function UpdateVarient() {
     );
   }, [productId, varientId, dispatch]);
   useEffect(() => {
-    dispatch(getAllBrands());
+    dispatch(getAllBrands("user"));
   }, [dispatch]);
 
   const { loading, selectedVarient } = useSelector(
