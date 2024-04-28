@@ -75,7 +75,9 @@ export function UsersPage() {
                           {user.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                          {format(user.createdAt, "PPP")}
+                          {user && user.createdAt && (
+                            <>{format(user?.createdAt, "PPP")}</>
+                          )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                           0
@@ -94,15 +96,13 @@ export function UsersPage() {
                             type="button"
                             onClick={() => {
                               if (user.status) {
-                              
                                 dispatch(
                                   userStatusAction({
                                     status: false,
                                     userId: String(user._id),
                                   })
                                 );
-                              }else{
-                                
+                              } else {
                                 dispatch(
                                   userStatusAction({
                                     status: true,
@@ -113,7 +113,11 @@ export function UsersPage() {
                             }}
                             className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
                           >
-                            {user.status ? <LockKeyhole /> : <FaLockOpen className="text-[19px]"/>}
+                            {user.status ? (
+                              <LockKeyhole />
+                            ) : (
+                              <FaLockOpen className="text-[19px]" />
+                            )}
                           </button>
                         </td>
                       </tr>

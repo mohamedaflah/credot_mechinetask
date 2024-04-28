@@ -75,9 +75,6 @@ export function AddVarient() {
     });
   }, [productId, setValue]);
   const submitProductForm = (values: z.infer<typeof productSchema>) => {
-    values;
-    console.log("🚀 ~ submitProductForm ~ values:", values);
-    dispatch;
     navigate;
     dispatch(addVarientAction({ productId: String(productId), sendData: values })).then(
       (res) => {
