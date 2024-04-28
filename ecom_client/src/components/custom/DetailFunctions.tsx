@@ -32,7 +32,7 @@ function DetailFunctions() {
       toast.error("pleaes login or create account");
       return navigate("/login");
     }
-    if (cartproducts?.includes(String(selectedVarient?._id))||gotoCart) {
+    if (cartproducts?.includes(String(selectedVarient?._id)) || gotoCart) {
       return navigate(`/cart/${user?._id}`);
     }
     // addToCartAction
@@ -87,22 +87,33 @@ function DetailFunctions() {
           <h2 className="text-[12px]">Sliver</h2>
         </div>
         <div className="flex mt-2 gap-2">
-          {selectedProduct?.variants?.map((varient, index) => (
+          {selectedProduct?.variants
+      ?.filter(
+        (variant, index, self) =>
+          self.findIndex((v) => v.color === variant.color) === index
+      ) // Filter unique color values
+      .map((variant) => (
+        <>
+          {variant.status === "publish" && (
             <div
-              key={index}
-              className="w-14 h-14 rounded-full  bg-[#F8F8F8] flex items-center justify-center"
+              key={variant._id}
+              className="w-14 h-14 rounded-full bg-[#F8F8F8] flex items-center justify-center"
             >
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer "
-                style={{ background: varient.color }}
-                onClick={() => handleColorClick(String(varient._id))}
+                className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer ${
+                  selectedVarient?.color === variant.color && "bg-black"
+                }`}
+                style={{ background: variant.color }}
+                onClick={() => handleColorClick(String(variant._id))}
               >
-                {selectedVarient?.color === varient.color && (
+                {selectedVarient?.color === variant.color && (
                   <IoCheckmark className="text-white text-2xl" />
                 )}
               </div>
             </div>
-          ))}
+          )}
+        </>
+      ))}
         </div>
       </div>
       <div>
@@ -148,7 +159,8 @@ function DetailFunctions() {
             } w-full text-sm rounded-sm text-white md:w-44 `}
             onClick={handleAddtocart}
           >
-            {cartproducts?.includes(String(selectedVarient?._id))||gotoCart ? (
+            {cartproducts?.includes(String(selectedVarient?._id)) ||
+            gotoCart ? (
               "Go to cart"
             ) : (
               <>{loading ? "Processing..." : "Add to cart"}</>

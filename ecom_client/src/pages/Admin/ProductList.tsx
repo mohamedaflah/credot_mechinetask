@@ -170,7 +170,7 @@ export function ProductList() {
                           onClick={() => handleNavigation(String(product._id))}
                         >
                           <div className="w-full h-full ">
-                            {product && !product.deleteStatus ? (
+                            {product && !product.variants?.every(x=>x.status=="unpublish") ? (
                               <>
                                 <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-green-400 flex items-center justify-center">
                                   Active
@@ -179,7 +179,7 @@ export function ProductList() {
                             ) : (
                               <>
                                 <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-red-400 flex items-center justify-center">
-                                  Deleted
+                                  un published
                                 </div>
                               </>
                             )}
