@@ -7,6 +7,8 @@ import { getAllProductAction } from "../actions/product/getAllProductAction";
 import { getAllVarients } from "../actions/product/Varients/getAllVarientsAction";
 import { addVarientAction } from "../actions/product/Varients/addNewVarient";
 import { getProductAndVarient } from "../actions/product/getProductAnVarient";
+import { updateProductAction } from "../actions/product/updateProductAction";
+import { Product } from "@/dev/types/Product/Product";
 
 const initialState: ProductReducer = {
   loading: false,
@@ -88,7 +90,27 @@ const productReducer = createSlice({
       .addCase(getProductAndVarient.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
-
+      })
+      .addCase(updateProductAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateProductAction.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.products = state.products?.map((product) => {
+          if (product?._id === payload.product?._id) {
+            return {
+              ...payload.product,
+              brand: payload.brand,
+            };
+          } else {
+            return product;
+          }
+        }) as Product[];
+        state.err = false;
+      })
+      .addCase(updateProductAction.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
       });
   },
 });

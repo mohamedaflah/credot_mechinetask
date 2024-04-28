@@ -8,6 +8,7 @@ export interface Product {
   variants?: Variant[];
   createdAt?: Date;
   updatedAt?: Date;
+  deleteStatus?: boolean;
 }
 
 export interface Variant {

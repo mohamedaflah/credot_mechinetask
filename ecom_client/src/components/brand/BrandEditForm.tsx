@@ -34,6 +34,7 @@ export function BrandEditForm({ brand }: ChildProp) {
       console.log("🚀 ~ imageUrlToFileObject ~ brand:", brand)
       setValue("title", brand.title);
 
+      
       setValue("description", brand.description);
       setValue("image", res as unknown as FileList);
     });
@@ -97,9 +98,9 @@ export function BrandEditForm({ brand }: ChildProp) {
           <textarea
             onChange={(e) => setValue("description", e.target.value)}
             className="w-full h-full border border-gray-300 rounded-md p-2 text-sm resize-none"
-            placeholder="brand descripton "
+            placeholder="brand descripton " value={watch("description")}
           >
-            {watch("description")}
+            
           </textarea>
         </div>
       </div>

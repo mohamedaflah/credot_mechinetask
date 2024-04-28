@@ -7,7 +7,10 @@ const ProductModel = new mongoose.Schema(
     category: String,
     brand: mongoose.Types.ObjectId,
     slug: String,
-    
+    deleteStatus: {
+      type: Boolean,
+      default: false,
+    },
     variants: [
       {
         description: String,

@@ -18,7 +18,7 @@ interface ChildProp {
 export function CustomeModal({ className, children, trigger,title }: ChildProp) {
   return (
     <Dialog>
-      <DialogTrigger className="bg-transparent outline-none border-none hover:bg-transparent p-0">
+      <DialogTrigger className="bg-transparent outline-none border-none hover:bg-transparent p-0" onClick={(e)=>e.stopPropagation()}>
         {trigger}
       </DialogTrigger>
       <DialogContent className={`${className}`}>

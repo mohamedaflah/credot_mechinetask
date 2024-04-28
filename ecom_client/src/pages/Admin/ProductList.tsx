@@ -1,7 +1,9 @@
+import { CustomeModal } from "@/components/custom/CustomeModa";
+import { ProductEditForm } from "@/components/product/ProductEdit";
 import { getAllProductAction } from "@/redux/actions/product/getAllProductAction";
 import { AppDispatch, RootState } from "@/redux/store";
 import { format } from "date-fns";
-import { ListFilter } from "lucide-react";
+import { Edit, ListFilter, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +90,12 @@ export function ProductList() {
                       </th>
                       <th
                         scope="col"
+                        className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase"
+                      >
+                        status
+                      </th>
+                      <th
+                        scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
                       >
                         Action
@@ -96,12 +104,11 @@ export function ProductList() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {products?.map((product) => (
-                      <tr
-                        key={product?._id}
-                        className="cursor-pointer"
-                        onClick={()=>handleNavigation(String(product._id))}
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center">
+                      <tr key={product?._id} className="cursor-pointer">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
                           {product && product.variants && (
                             <img
                               src={product?.variants[0]?.images[0]}
@@ -111,10 +118,16 @@ export function ProductList() {
                           )}
                           {product?.productName}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-sm text-gray-800"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
                           {product?.category}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 flex gap-2 items-center">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 flex gap-2 items-center"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
                           <img
                             src={
                               product?.brand?.split(
@@ -140,19 +153,74 @@ export function ProductList() {
                             )[0]
                           }
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
                           {format(String(product.createdAt), "PPP")}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
                           {format(String(product.createdAt), "PPP")}
                         </td>
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium"
+                          onClick={() => handleNavigation(String(product._id))}
+                        >
+                          <div className="w-full h-full ">
+                            {product && !product.deleteStatus ? (
+                              <>
+                                <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-green-400 flex items-center justify-center">
+                                  Active
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-red-400 flex items-center justify-center">
+                                  Deleted
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          <button
-                            type="button"
-                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
-                          >
-                            Delete
-                          </button>
+                          <div className="w-full h-full flex gap-2 justify-end">
+                            <CustomeModal
+                              trigger={
+                                <button
+                                  type="button"
+                                  className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                                >
+                                  <Edit className="w-6" />
+                                </button>
+                              }
+                            >
+                              <div>
+                                <ProductEditForm
+                                  productId={product?._id as string}
+                                  brand={String(product?.brand?.split(
+                                    "[(*)]" as unknown as {
+                                      [Symbol.split](
+                                        string: string,
+                                        limit?: number | undefined
+                                      ): string[];
+                                    }
+                                  )[0])}
+                                  category={String(product.category)}
+                                  productName={String(product.productName)}
+                                />
+                              </div>
+                            </CustomeModal>
+
+                            <button
+                              type="button"
+                              className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
+                            >
+                              <Trash2 className="w-6" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
