@@ -6,6 +6,7 @@ import { fetchSpecificProduct } from "../../controllers/Product/fetchSpecificPro
 import { addNewVarient } from "../../controllers/Product/Varients/addnewVarient";
 import { getProductAndVarient } from "../../controllers/Product/Varients/getProductAndVarient";
 import { updateProduct } from "../../controllers/Product/updateProduct";
+import { updateVarient } from "../../controllers/Product/Varients/updateVarient";
 
 const productRouter = Router();
 
@@ -13,4 +14,5 @@ productRouter.route(`/product`).post(addNewProduct).get(getAllProduct).patch(upd
 productRouter.route(`/variants/:productId`).get(getAllVarients).post(addNewVarient);
 productRouter.post(`/getoneproduct`, fetchSpecificProduct);
 productRouter.get(`/product/:productId/:varientId`,getProductAndVarient)
+productRouter.put(`/product/:productId/:varientId`,updateVarient)
 export default productRouter;

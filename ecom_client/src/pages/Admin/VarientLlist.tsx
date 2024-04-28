@@ -160,7 +160,7 @@ export function VarientList() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                             <div className="mx-auto flex justify-center">
-                              <Edit />
+                              <Edit onClick={()=>navigate(`/admin/updatevarient/${productId}/${varient?._id}`)}/>
                             </div>
                           </td>
                         </tr>

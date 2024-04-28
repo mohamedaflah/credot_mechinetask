@@ -22,6 +22,7 @@ import { VarientList } from "./pages/Admin/VarientLlist";
 import { AddVarient } from "./pages/Admin/AddVarient";
 import { OrderSucess } from "./pages/OrderSucces";
 import { Orders } from "./pages/Order";
+import { UpdateVarient } from "./pages/Admin/UpdateVarient";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -47,7 +48,10 @@ function App() {
           path="/signup"
           element={!user ? <Signup /> : <Navigate to={"/"} />}
         />
-        <Route path="/order-success" element={user?<OrderSucess />:<Navigate to={"/"}/>} />
+        <Route
+          path="/order-success"
+          element={user ? <OrderSucess /> : <Navigate to={"/"} />}
+        />
         {/*  Login and Register */}
         <Route path="/product/:productId" element={<Detail />} />{" "}
         {/* Product detail page  */}
@@ -58,20 +62,32 @@ function App() {
           element={user ? <WhishList /> : <Navigate to={"/"} />}
         />{" "}
         {/* Whish list page */}
-        <Route
-          path="/admin/"
-          element={
-            user && role === "admin" ? <AdminLayout /> : <Navigate to={"/"} />
-          }
-        >
-          <Route index element={<ProductList />} />
-          <Route path="categories" element={<CategoryPage />} />
-          <Route path="brands" element={<BrandPage />} />
-          <Route path="users" element={<UsersPage />} />
-          <Route path="addproduct" element={<AddProduct />} />
-          <Route path="varient/:productId" element={<VarientList />} />
-          <Route path="addvarient/:productId" element={<AddVarient />} />
-        </Route>
+        {role == "admin" && (
+          <>
+            <Route
+              path="/admin/"
+              element={
+                user && role === "admin" ? (
+                  <AdminLayout />
+                ) : (
+                  <Navigate to={"/"} />
+                )
+              }
+            >
+              <Route index element={<ProductList />} />
+              <Route path="categories" element={<CategoryPage />} />
+              <Route path="brands" element={<BrandPage />} />
+              <Route path="users" element={<UsersPage />} />
+              <Route path="addproduct" element={<AddProduct />} />
+              <Route path="varient/:productId" element={<VarientList />} />
+              <Route path="addvarient/:productId" element={<AddVarient />} />
+              <Route
+                path="updatevarient/:productId/:varientId"
+                element={<UpdateVarient />}
+              />
+            </Route>
+          </>
+        )}
       </Routes>
       {role !== "admin" && <Footer />}
     </main>

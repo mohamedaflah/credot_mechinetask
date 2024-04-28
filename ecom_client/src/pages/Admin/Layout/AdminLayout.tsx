@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Logo from "@/assets/Logo@.svg";
 import { Box, Codepen, LogOut, Menu, Package2, UserCog } from "lucide-react";
 import { AppDispatch } from "@/redux/store";
@@ -6,8 +6,11 @@ import { userLogoutAction } from "@/redux/actions/users/logoutUserAction";
 import { useDispatch } from "react-redux";
 export function AdminLayout() {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogout = () => {
-    dispatch(userLogoutAction());
+    dispatch(userLogoutAction()).then(()=>{
+      navigate('/')
+    })
   };
   return (
     <main className="h-screen flex gap-2 lg:p-5 overflow-hidden  ">

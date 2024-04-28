@@ -7,15 +7,14 @@ export const updateVarient = async (
   next: NextFunction
 ) => {
   try {
-    const { productId } = req.params;
-    const { varientId, data } = req.body;
+    const { productId,varientId } = req.params;
 
     const updatedProduct = await ProductModel.updateOne(
       {
         _id: productId,
         "variants._id": varientId,
       },
-      { $set: { "variants.$[elem]": data } },
+      { $set: { "variants.$[elem]": req.body } },
       { arrayFilters: [{ "elem._id": varientId }], new: true }
     );
 

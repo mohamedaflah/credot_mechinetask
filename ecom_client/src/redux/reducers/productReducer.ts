@@ -9,6 +9,7 @@ import { addVarientAction } from "../actions/product/Varients/addNewVarient";
 import { getProductAndVarient } from "../actions/product/getProductAnVarient";
 import { updateProductAction } from "../actions/product/updateProductAction";
 import { Product } from "@/dev/types/Product/Product";
+import { updateVarientAction } from "../actions/product/Varients/updateVarient";
 
 const initialState: ProductReducer = {
   loading: false,
@@ -111,6 +112,18 @@ const productReducer = createSlice({
       .addCase(updateProductAction.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
+      })
+      .addCase(updateVarientAction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateVarientAction.fulfilled, (state) => {
+        state.loading = false;
+        toast.success("Product updated");
+      })
+      .addCase(updateVarientAction.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
+        toast.error(state.err);
       });
   },
 });
