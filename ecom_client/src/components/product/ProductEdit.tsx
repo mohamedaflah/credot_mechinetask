@@ -55,7 +55,7 @@ export function ProductEditForm({
   }, [brands]);
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllBrands());
+    dispatch(getAllBrands("user"));
   }, [dispatch]);
   const { loading } = useSelector((state: RootState) => state.product);
   const submitProductEditForm = (values: z.infer<typeof productEdit>) => {
