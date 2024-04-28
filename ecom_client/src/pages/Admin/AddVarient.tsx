@@ -33,7 +33,7 @@ import { addVarientAction } from "@/redux/actions/product/Varients/addNewVarient
 export function AddVarient() {
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllBrands());
+    dispatch(getAllBrands("user"));
   }, [dispatch]);
 
   const { loading } = useSelector((state: RootState) => state.product);
