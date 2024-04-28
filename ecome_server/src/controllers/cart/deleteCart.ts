@@ -9,16 +9,16 @@ export const deleteCart = async (
   try {
     // CART_MODEL
     const { userId, productId } = req.query;
-    console.log(req.query)
+    console.log(req.query);
     const cart = await CartModel.findOne({ userId: userId });
+console.log("REchd");
 
     if (cart && cart.products) {
-      console.log("()",cart.products.length)
+      console.log("()", cart.products.length);
       cart.products = cart.products.filter(
         (value) => String(value?.productId) !== productId
       ) as any;
       await cart.save();
-      const finalLength = cart.products.length;
       console.log("Initial products:", "initialLength", "Final products:");
     }
 
@@ -82,11 +82,14 @@ export const deleteCart = async (
       },
     ]);
 
-
-
     res
       .status(200)
-      .json({ status: true, message: "Succesfull", cartProduct: productId,cart:cartData[0].products });
+      .json({
+        status: true,
+        message: "Succesfull",
+        cartProduct: productId,
+        cart: cartData[0].products ? cartData[0].products : null,
+      });
   } catch (error) {
     next(error);
   }

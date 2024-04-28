@@ -72,6 +72,7 @@ const cartReducer = createSlice({
       .addCase(deleteCartAction.rejected, (state, { payload }) => {
         state.loading = false;
         state.err = (payload as ErrorPayload).message;
+        state.cart=null
       })
       .addCase(getCartProductIds.pending, (state) => {
         state.loading = false;
