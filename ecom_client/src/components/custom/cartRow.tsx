@@ -47,7 +47,7 @@ function CartRow({ cartData }: ChildProp) {
     );
   };
   return (
-    <div className="flex border-b border-[#E2E2E2] py-1 h-28 items-center justify-between min-w-[500px]">
+    <div className="flex border-b border-[#E2E2E2] py-1 h-28 items-center justify-between min-w-[510px]">
       <div className="w-56 flex items-center lg:gap-3">
         <div className="h-14  relative w-14 p-1 bg-[#F9F9F9]  ">
           <div

@@ -28,7 +28,7 @@ export const Header = () => {
             <input
               type="text"
               className="w-full text-[12px] outline-none border-none placeholder-[#585858]"
-              placeholder="What are you looking for?"
+              placeholder="Search product"
             />
             <div className="h-full w-14 flex items-center justify-center  bg-black">
               <img src={Search} alt="Search" className="w-5" />

@@ -28,7 +28,7 @@ export default function ProductCard({
         <img
           src={product?.variants?.[0]?.images?.[0]}
           alt="Product image"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
         />
       </div>
       <div className="px-3 space-y-1 lg:space-y-3">

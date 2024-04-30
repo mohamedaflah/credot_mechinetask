@@ -5,7 +5,7 @@ import { getAllProductsinCart } from "@/redux/actions/cart/getAllProductIncart";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import empty from "@/assets/mtpy.svg";
 function Cart() {
   const dispatch: AppDispatch = useDispatch();
@@ -42,7 +42,7 @@ function Cart() {
           <>
             <div className="flex flex-col xl:flex-row lg:items-start gap-10">
               <div className="w-full min-h-56 flex flex-col overflow-x-auto ">
-                <div className="flex border-b border-[#E2E2E2] py-1 justify-between min-w-[500px]">
+                <div className="flex border-b border-[#E2E2E2] py-1 justify-between min-w-[510px]">
                   <div className="w-56 ">
                     <span className="text-sm uppercase">Product</span>
                   </div>
@@ -71,21 +71,21 @@ function Cart() {
                       apply coupon
                     </button>
                   </div>
-                  <button className="h-full w-40 border-2 border-black text-sm uppercase font-semibold">
+                  <Link to={"/"} className="h-full flex items-center justify-center w-40 border-2 border-black text-sm uppercase font-semibold">
                     update cart
-                  </button>
+                  </Link>
                 </div>
               </div>
-              <div className="grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 mt-5 lg:grid-cols-1  xl:grid-cols-none xl:grid-rows-none">
-                <div className="w-[90%] ">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:grid-rows-1 mt-5 lg:grid-cols-1  xl:grid-cols-none xl:grid-rows-none">
+                <div className="w-full  ">
                   <div className=" flex-col gap-2 flex lg:hidden">
-                    <div className="w-full h-10 border border-[#DFDCDC] overflow-hidden flex">
+                    <div className="w-full  h-10 border border-[#DFDCDC] overflow-hidden flex">
                       <input
                         type="text"
                         placeholder="Apply coupon"
                         className="h-full w-full text-[12px] md:text-sm p-3 outline-none"
                       />
-                      <button className="h-full text-[9px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
+                      <button className="h-full text-[10px] min-w-32 md:text-sm line-clamp-1 uppercase text-white bg-black">
                         apply coupon
                       </button>
                     </div>

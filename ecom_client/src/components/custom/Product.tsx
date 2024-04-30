@@ -17,11 +17,10 @@ export default function Product() {
     navigate(`/product/${productId}?varient=${variantId}`);
   };
   return (
-    <section className="w-[86%] sm:w-[80%] mx-auto mt-4">
+    <section className="w-[86%] sm:w-[80%] mx-auto mt-10">
       <div className="w-full ">
         <div className="w-full flex justify-between">
           <h1 className="font-semibold text-lg">Product</h1>
-          <span className="text-sm">View All product</span>
         </div>
         <HorizontalLine className="w-full" />
       </div>
