@@ -1,8 +1,9 @@
+import { ProductAxios } from "@/constants/axiosInstance";
 import { getAllVarients } from "@/redux/actions/product/Varients/getAllVarientsAction";
 import { AppDispatch, RootState } from "@/redux/store";
 import { format } from "date-fns";
 import { Edit, ListFilter } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -14,11 +15,15 @@ export function VarientList() {
     dispatch(getAllVarients(String(productId)));
   }, [dispatch, productId]);
   const { varients } = useSelector((state: RootState) => state.product);
+  const [title, setproductTitle] = useState<string>("");
+  ProductAxios.post(`/getoneproduct`, { productId }).then((res) => {
+    setproductTitle(String(res.data.product.productName));
+  });
   return (
     <main className="w-full h-full px-5 space-y-5">
       <div className="w-full flex justify-between">
         <div className="">
-          <h1>Varients of Apple</h1>
+          <h1>Varients of {title}</h1>
         </div>
         <div className="flex gap-4">
           <div className="h-10 flex gap-1 ">
@@ -160,7 +165,13 @@ export function VarientList() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                             <div className="mx-auto flex justify-center">
-                              <Edit onClick={()=>navigate(`/admin/updatevarient/${productId}/${varient?._id}`)}/>
+                              <Edit
+                                onClick={() =>
+                                  navigate(
+                                    `/admin/updatevarient/${productId}/${varient?._id}`
+                                  )
+                                }
+                              />
                             </div>
                           </td>
                         </tr>
