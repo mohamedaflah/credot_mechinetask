@@ -19,7 +19,7 @@ export const loginUser = async (
     }
     const passCompare = await bcrypt.compare(password, userExist.password);
     if (!passCompare) {
-      throw new Error("User not registered");
+      throw new Error("Incorrect email or password");
     }
 
     const acessToken = generateToken({
