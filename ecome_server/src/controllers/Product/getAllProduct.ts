@@ -53,6 +53,7 @@ export const getAllProduct = async (
           },
         },
       ]);
+      console.log("🚀 ~ products:", products)
     }
 
     res.status(200).json({ status: true, message: "successfull", products });
