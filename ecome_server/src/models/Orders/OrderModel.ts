@@ -9,7 +9,7 @@ const OrderModel = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "shipped", "delivered"],
+      enum: ["pending", "shipped", "delivered","rejected"],
     },
     totalAmount: {
       type: Number,

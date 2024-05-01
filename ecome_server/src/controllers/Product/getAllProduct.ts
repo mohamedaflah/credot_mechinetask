@@ -24,7 +24,7 @@ export const getAllProduct = async (
         },
         {
           $set: {
-            brand: {$concat:["$result.title","[(*)]","$result.image"]},
+            brand: { $concat: ["$result.title", "[(*)]", "$result.image"] },
           },
         },
         {
@@ -33,7 +33,7 @@ export const getAllProduct = async (
       ]);
     } else {
       products = await ProductModel.aggregate([
-        { $match: { "variants.status": "publish" } },
+        { $match: { "variants.status": "publish", deleteStatus: false } },
         {
           $project: {
             productName: 1,
