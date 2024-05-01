@@ -59,7 +59,7 @@ export function ProductEditForm({
   }, [dispatch]);
   const { loading } = useSelector((state: RootState) => state.product);
   const submitProductEditForm = (values: z.infer<typeof productEdit>) => {
-    console.log(values);
+
 
     dispatch(updateProductAction({ productId: productId, data: values }));
   };

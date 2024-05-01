@@ -65,8 +65,6 @@ export function AddProduct() {
 
   const navigate = useNavigate();
   const submitProductForm = (values: z.infer<typeof productSchema>) => {
-    values;
-    console.log("🚀 ~ submitProductForm ~ values:", values);
     dispatch(addProductAction(values)).then((res) => {
       if (res.type.endsWith("fulfilled")) {
         navigate("/");
@@ -215,7 +213,7 @@ export function AddProduct() {
                           ...(filesArray as unknown as (FileList | null)[]),
                         ]);
                       }
-                      console.log(getValues("images"));
+        
                     }
                   }}
                 />

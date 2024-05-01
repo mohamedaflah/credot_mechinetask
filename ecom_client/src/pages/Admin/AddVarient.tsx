@@ -225,7 +225,7 @@ export function AddVarient() {
                           ...(filesArray as unknown as (FileList | null)[]),
                         ]);
                       }
-                      console.log(getValues("images"));
+
                     }
                   }}
                 />

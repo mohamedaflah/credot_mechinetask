@@ -31,7 +31,6 @@ export function BrandEditForm({ brand }: ChildProp) {
   });
   useEffect(() => {
     imageUrlToFileObject(brand.image as string).then((res) => {
-      console.log("🚀 ~ imageUrlToFileObject ~ brand:", brand)
       setValue("title", brand.title);
 
       

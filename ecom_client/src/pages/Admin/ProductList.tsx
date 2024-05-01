@@ -21,7 +21,7 @@ export function ProductList() {
   };
   const updateProductStatus = (status: boolean, productId: string) => {
     dispatch(
-      updateProductAction({ productId: productId, data: { status: status } })
+      updateProductAction({ productId: productId, data: { deleteStatus: status } })
     );
   };
   const { products } = useSelector((state: RootState) => state.product);

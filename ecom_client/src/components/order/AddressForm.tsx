@@ -26,7 +26,6 @@ export function AddressForm() {
       street: "",
     },
   });
-  console.log("Form Errors:", errors); // Add this line to log errors
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const { cart } = useSelector((state: RootState) => state.cart);

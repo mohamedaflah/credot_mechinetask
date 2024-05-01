@@ -17,8 +17,8 @@ export const updateProduct = async (
     await ProductModel.updateOne({ _id: productId }, { $set: req.body.data });
     const updatedProduct =await ProductModel.findOne({ _id: productId });
 
-    const brand=await Brand.findOne({_id:req.body.data?.brand})
-    console.log("🚀 ~ brand:", brand)
+    const brand=await Brand.findOne({_id:updatedProduct?.brand})
+
 
     res
       .status(200)
