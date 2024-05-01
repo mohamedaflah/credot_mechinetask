@@ -159,7 +159,7 @@ export function OrderList() {
                               <div
                                 className={`px-2 h-7 text-[11px] text-white rounded-3xl capitalize ${
                                   order.status == "pending"
-                                    ? "bg-yellow-300"
+                                    ? "bg-yellow-400"
                                     : order.status === "delivered"
                                     ? "bg-green-400"
                                     : order.status === "rejected"
