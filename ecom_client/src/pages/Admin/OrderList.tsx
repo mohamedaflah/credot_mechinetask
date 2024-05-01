@@ -196,7 +196,7 @@ export function OrderList() {
                                 handleChangeOrder(value, String(order._id))
                               }
                             >
-                              <SelectTrigger className="w-[95px]">
+                              <SelectTrigger className="w-[100px] h-8 text-[12px]">
                                 <SelectValue placeholder="status" />
                               </SelectTrigger>
                               <SelectContent>
