@@ -272,7 +272,7 @@ export function UpdateVarient() {
                           ...(filesArray as unknown as (FileList | null)[]),
                         ]);
                       }
-                      console.log(getValues("images"));
+                  
                     }
                   }}
                 />

@@ -54,7 +54,6 @@ export const getAllProduct = async (
         },
       ]);
     }
-    console.log(" Products ", products);
 
     res.status(200).json({ status: true, message: "successfull", products });
   } catch (error) {

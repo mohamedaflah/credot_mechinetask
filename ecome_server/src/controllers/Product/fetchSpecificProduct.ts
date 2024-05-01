@@ -9,8 +9,7 @@ export const fetchSpecificProduct = async (
 ) => {
   try {
     const { productId } = req.body;
-    
-    console.log('()');
+
     
     const product=await ProductModel.aggregate([
       {
@@ -36,7 +35,7 @@ export const fetchSpecificProduct = async (
         $project: { result: false },
       },
     ]);
-    console.log("🚀 ~ product:", product)
+
     res.status(200).json({ status: true, message: "Succesfull", product:product[0] });
   } catch (error) {
     next(error);

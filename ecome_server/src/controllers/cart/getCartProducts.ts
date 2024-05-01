@@ -62,7 +62,7 @@ export const getCartProducts = async (
       },
     ]);
 
-    console.log("🚀 ~ cartData:", cartData);
+  
     res
       .status(200)
       .json({ status: true, message: "Succesfull", cart: cartData?.[0].products });

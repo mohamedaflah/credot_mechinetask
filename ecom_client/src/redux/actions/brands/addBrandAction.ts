@@ -14,7 +14,7 @@ export const addBrandAction = createAsyncThunk(
       const { data } = await BrandAxios.post(`/brand`, sendData);
       return data;
     } catch (error) {
-      console.log("🚀 ~ error:", error)
+   
       return rejectWithValue(handleErrors(error));
     }
   }

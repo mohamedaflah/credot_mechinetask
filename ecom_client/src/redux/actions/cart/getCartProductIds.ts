@@ -10,7 +10,7 @@ export const getCartProductIds = createAsyncThunk(
       const { data } = await CartAxios.post(`/getcartproducts`, {
         userId: userId,
     });
-    console.log("🚀 ~ data:", data) 
+
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));

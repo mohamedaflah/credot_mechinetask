@@ -18,7 +18,6 @@ export const updateVarient = async (
       { arrayFilters: [{ "elem._id": varientId }], new: true }
     );
 
-    console.log("🚀 ~ updatedProduct:", updatedProduct);
     res.status(200).json({status:true,message:"Succesfull",product:updatedProduct})
   } catch (error) {
     next(error);

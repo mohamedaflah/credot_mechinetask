@@ -13,7 +13,7 @@ export const getAllVarients = async (
       { _id: productId },
       { variants: true }
     );
-    console.log("🚀 ~ products:", products)
+
     res
       .status(200)
       .json({ status: true, message: "Successful", products: products[0] });

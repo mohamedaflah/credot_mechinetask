@@ -8,7 +8,7 @@ export const getUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log('()');
+
     
     if (!req.cookies[process.env.COOKIE_NAME as string]) {
       throw new Error("Token expired");

@@ -9,7 +9,7 @@ export const updateCart = async (
   try {
     // CART_MODEL
     const { userId, productId, qty, currentSotck } = req.body;
-    console.log(req.body);
+
 
     const cart = await CartModel.findOne({ userId: userId });
     let message=""

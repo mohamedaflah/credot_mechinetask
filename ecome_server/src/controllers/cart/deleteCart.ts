@@ -9,17 +9,17 @@ export const deleteCart = async (
   try {
     // CART_MODEL
     const { userId, productId } = req.query;
-    console.log(req.query);
+
     const cart = await CartModel.findOne({ userId: userId });
-console.log("REchd");
+
 
     if (cart && cart.products) {
-      console.log("()", cart.products.length);
+    
       cart.products = cart.products.filter(
         (value) => String(value?.productId) !== productId
       ) as any;
       await cart.save();
-      console.log("Initial products:", "initialLength", "Final products:");
+
     }
 
     const cartData = await CartModel.aggregate([

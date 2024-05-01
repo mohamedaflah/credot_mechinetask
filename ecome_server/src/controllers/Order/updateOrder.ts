@@ -10,7 +10,7 @@ export const updateOrder = async (
     const { orderId, data } = req.body;
     await OrderModel.updateOne({ _id: orderId }, { $set: data  });
     const order = await OrderModel.findOne({ _id: orderId });
-    console.log(req.body,' ()()');
+
     
     res.status(200).json({ message: "Succesfull", order,orderId:orderId,status:order?.status });
   } catch (error) {

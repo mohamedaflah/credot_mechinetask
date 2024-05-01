@@ -7,7 +7,7 @@ export const getAllUsersAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await CustomAxios.get(`/api/v1/user/getAllusers`);
-      console.log("🚀 ~ data:", data)
+   
       return data;
     } catch (error) {
       return rejectWithValue(handleErrors(error));

@@ -7,7 +7,7 @@ export async function addNewProduct(
   next: NextFunction
 ) {
   try {
-    console.log(req.body,' add ro');
+  
 
     const newProduct = await ProductModel.create(req.body);
     res

@@ -10,7 +10,7 @@ export const updateProduct = async (
 ) => {
   try {
     const { productId,data } = req.body;
-    console.log(req.body,')(')
+
     if(req.body.data.brand){
       req.body.data.brand=new mongoose.Types.ObjectId(req.body.data.brand)
     }

@@ -8,10 +8,10 @@ export const checkUserBlockStatus = async (
   next: NextFunction
 ) => {
   const token = req.cookies[process.env.COOKIE_NAME as string];
-  console.log("🚀 ~ token:", token);
+
   if (token) {
     const { userId } = getPayloadFromJWT(token);
-    console.log("🚀 ~ userId:", userId);
+
     const user = await UserModel.findById(userId);
     if (!user?.status) {
       res.clearCookie(process.env.COOKIE_NAME as string)

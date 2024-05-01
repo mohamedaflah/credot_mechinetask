@@ -9,8 +9,7 @@ export const updateUserStatus = async (
 ) => {
   try {
     const { status, userId } = req.query;
-    console.log("🚀 ~ userId:", userId);
-    console.log("🚀 ~ status:", status);
+
     await UserModel.updateOne(
       { _id: userId },
       {
@@ -18,7 +17,7 @@ export const updateUserStatus = async (
       }
     );
     const updatedUser=await UserModel.findById(userId)
-    console.log("🚀 ~ updatedUser:", updatedUser);
+
     res
       .status(200)
       .json({ status: true, message: "Succesfull", user: updatedUser });
