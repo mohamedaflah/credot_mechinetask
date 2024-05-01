@@ -23,6 +23,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
+    "color-name": "^2.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.0-rc22",
     "lucide-react": "^0.331.0",
@@ -44,6 +45,7 @@
     "zod": "^3.23.4"
   },
   "devDependencies": {
+    "@types/color-name": "^1.1.4",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",

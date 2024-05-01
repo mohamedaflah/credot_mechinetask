@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { addToCartAction } from "@/redux/actions/cart/addTocart";
 import toast from "react-hot-toast";
+import hexToColorName from "@/util/colorToHascode";
 
 function DetailFunctions() {
   const { selectedProduct, selectedVarient } = useSelector(
@@ -84,7 +85,7 @@ function DetailFunctions() {
       <div>
         <div className="flex gap-1 mt-4 text-lg items-center">
           <span className="text-lg font-semibold">Color</span>:
-          <h2 className="text-[12px]">Sliver</h2>
+          <h2 className="text-[12px]">{hexToColorName(String(selectedVarient?.color))}</h2>
         </div>
         <div className="flex mt-2 gap-2">
           {selectedProduct?.variants
