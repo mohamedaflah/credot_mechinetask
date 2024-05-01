@@ -5,7 +5,7 @@ import { updateProductAction } from "@/redux/actions/product/updateProductAction
 import { AppDispatch, RootState } from "@/redux/store";
 import { format } from "date-fns";
 import { Edit, ListFilter, RotateCcw, Trash2 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +25,7 @@ export function ProductList() {
     );
   };
   const { products } = useSelector((state: RootState) => state.product);
+  const [title,setTitle]=useState<string>("")
   return (
     <main className="w-full h-full px-5 space-y-5 overflow-y-auto">
       <div className="w-full flex justify-between">
@@ -48,7 +49,10 @@ export function ProductList() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-end">
+      <div className="w-full flex justify-between">
+        <h1 className="text-green-600 capitalize">
+          {title&&`click and go for variant list of ${title}`}
+        </h1>
         <button
           className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white"
           onClick={() => navigate("addproduct")}
@@ -113,6 +117,8 @@ export function ProductList() {
                       <tr
                         key={product?._id}
                         className="cursor-pointer hover:bg-slate-50"
+                        onMouseOver={()=>setTitle(String(product.productName))}
+                        onMouseLeave={()=>setTitle("")}
                       >
                         <td
                           className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center"
