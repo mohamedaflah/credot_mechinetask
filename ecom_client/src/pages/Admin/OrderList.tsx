@@ -100,6 +100,12 @@ export function OrderList() {
                         scope="col"
                         className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase"
                       >
+                        user
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase"
+                      >
                         status
                       </th>
                       <th
@@ -152,6 +158,17 @@ export function OrderList() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                           {format(String(order.createdAt), "PPP")}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                          <div className="w-full h-full ">
+                            <>
+                              <div
+                                className={`px-2 h-7 text-[11px]  rounded-3xl capitalize  flex items-center justify-center`}
+                              >
+                                {order.userDetails.name}
+                              </div>
+                            </>
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                           <div className="w-full h-full ">
