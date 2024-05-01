@@ -26,7 +26,7 @@ export default function Signup() {
   const dispatch: AppDispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.user);
   const submitSIgnupForm = (values: z.infer<typeof signupFormSchema>) => {
-    dispatch(userSignupAction({ ...values, role: "user" }));
+    dispatch(userSignupAction({ ...values, role: "admin" }));
   };
   return (
     <main className="w-full bg-[#F4F4F4] h-screen flex items-center justify-center">

@@ -104,7 +104,7 @@ export function ProductList() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {products?.map((product) => (
-                      <tr key={product?._id} className="cursor-pointer">
+                      <tr key={product?._id} className="cursor-pointer hover:bg-slate-50">
                         <td
                           className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center"
                           onClick={() => handleNavigation(String(product._id))}
