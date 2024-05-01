@@ -4,6 +4,7 @@ import { createOrder } from "../actions/order/createOrderAciton";
 import toast from "react-hot-toast";
 import { ErrorPayload } from "@/dev/types/Common/ErroInterface";
 import { getOrdersByUser } from "../actions/order/getOrdersByUser";
+import { getAllOrders } from "../actions/order/getAllOrders";
 
 const initialState: OrderInitial = {
   loading: false,
@@ -43,7 +44,17 @@ const orderReducer = createSlice({
         state.err = (payload as ErrorPayload).message;
         toast.error(state.err);
         state.loading = false;
-        
+      })
+      .addCase(getAllOrders.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllOrders.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.orders = payload.orders;
+      })
+      .addCase(getAllOrders.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.err = (payload as ErrorPayload).message;
       });
   },
 });

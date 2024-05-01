@@ -39,7 +39,7 @@ export function AdminLayout() {
             <Codepen className="w-5" /> <span>Brands</span>
           </Link>
           <Link
-            to={""}
+            to={"orders"}
             className="h-10 w-full bg-slate-200 rounded-lg flex items-center gap-3 px-5"
           >
             <Package2 className="w-5" /> <span>Orders</span>

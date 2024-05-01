@@ -8,6 +8,7 @@ export const getAllOrdersForAdmin = async (
 ) => {
   try {
     const orders = await getAllOrders();
+    console.log("🚀 ~ orders:", (orders))
     res.status(200).json({ status: true, message: "Succesfull", orders });
   } catch (error) {
     next(error);

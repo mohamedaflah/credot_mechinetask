@@ -26,4 +26,5 @@ export interface Variant {
   modelNumber: string;
   releasedDate: Date;
   category?: string;
+  productName?:string
 }

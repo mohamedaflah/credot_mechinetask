@@ -23,6 +23,7 @@ import { AddVarient } from "./pages/Admin/AddVarient";
 import { OrderSucess } from "./pages/OrderSucces";
 import { Orders } from "./pages/Order";
 import { UpdateVarient } from "./pages/Admin/UpdateVarient";
+import { OrderList } from "./pages/Admin/OrderList";
 function App() {
   const { user, role } = useSelector((state: RootState) => state.user);
   const dispatch: AppDispatch = useDispatch();
@@ -85,6 +86,7 @@ function App() {
                 path="updatevarient/:productId/:varientId"
                 element={<UpdateVarient />}
               />
+              <Route path="orders" element={<OrderList/>}/>
             </Route>
           </>
         )}
