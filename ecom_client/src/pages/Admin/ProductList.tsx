@@ -1,9 +1,10 @@
 import { CustomeModal } from "@/components/custom/CustomeModa";
 import { ProductEditForm } from "@/components/product/ProductEdit";
 import { getAllProductAction } from "@/redux/actions/product/getAllProductAction";
+import { updateProductAction } from "@/redux/actions/product/updateProductAction";
 import { AppDispatch, RootState } from "@/redux/store";
 import { format } from "date-fns";
-import { Edit, ListFilter, Trash2 } from "lucide-react";
+import { Edit, ListFilter, RotateCcw, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,11 @@ export function ProductList() {
 
   const handleNavigation = (id: string) => {
     navigate(`varient/${id}`);
+  };
+  const updateProductStatus = (status: boolean, productId: string) => {
+    dispatch(
+      updateProductAction({ productId: productId, data: { status: status } })
+    );
   };
   const { products } = useSelector((state: RootState) => state.product);
   return (
@@ -104,7 +110,10 @@ export function ProductList() {
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {products?.map((product) => (
-                      <tr key={product?._id} className="cursor-pointer hover:bg-slate-50">
+                      <tr
+                        key={product?._id}
+                        className="cursor-pointer hover:bg-slate-50"
+                      >
                         <td
                           className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex gap-2 items-center"
                           onClick={() => handleNavigation(String(product._id))}
@@ -170,16 +179,29 @@ export function ProductList() {
                           onClick={() => handleNavigation(String(product._id))}
                         >
                           <div className="w-full h-full ">
-                            {product && !product.variants?.every(x=>x.status=="unpublish") ? (
+                            {product && !product.deleteStatus ? (
                               <>
-                                <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-green-400 flex items-center justify-center">
-                                  Active
-                                </div>
+                                {product &&
+                                !product.variants?.every(
+                                  (x) => x.status == "unpublish"
+                                ) ? (
+                                  <>
+                                    <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-green-400 flex items-center justify-center">
+                                      Active
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-red-400 flex items-center justify-center">
+                                      un published
+                                    </div>
+                                  </>
+                                )}
                               </>
                             ) : (
                               <>
-                                <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-red-400 flex items-center justify-center">
-                                  un published
+                                <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-red-500 flex items-center justify-center">
+                                  Deleted
                                 </div>
                               </>
                             )}
@@ -200,14 +222,16 @@ export function ProductList() {
                               <div>
                                 <ProductEditForm
                                   productId={product?._id as string}
-                                  brand={String(product?.brand?.split(
-                                    "[(*)]" as unknown as {
-                                      [Symbol.split](
-                                        string: string,
-                                        limit?: number | undefined
-                                      ): string[];
-                                    }
-                                  )[0])}
+                                  brand={String(
+                                    product?.brand?.split(
+                                      "[(*)]" as unknown as {
+                                        [Symbol.split](
+                                          string: string,
+                                          limit?: number | undefined
+                                        ): string[];
+                                      }
+                                    )[0]
+                                  )}
                                   category={String(product.category)}
                                   productName={String(product.productName)}
                                 />
@@ -218,7 +242,27 @@ export function ProductList() {
                               type="button"
                               className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"
                             >
-                              <Trash2 className="w-6" />
+                              {product.deleteStatus ? (
+                                <RotateCcw
+                                  className="w-6"
+                                  onClick={() =>
+                                    updateProductStatus(
+                                      false,
+                                      String(product._id)
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <Trash2
+                                  className="w-6"
+                                  onClick={() =>
+                                    updateProductStatus(
+                                      true,
+                                      String(product._id)
+                                    )
+                                  }
+                                />
+                              )}
                             </button>
                           </div>
                         </td>
