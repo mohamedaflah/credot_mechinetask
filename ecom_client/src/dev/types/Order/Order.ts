@@ -25,7 +25,7 @@ export interface AdminOrder {
   _id: string;
   userId: string;
   paymentMode: "online" | "cod";
-  status: "pending" | "shipped" | "delivered";
+  status: "pending" | "shipped" | "delivered"|"rejected";
   totalAmount: number;
   address: {
     place: string;

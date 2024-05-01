@@ -156,7 +156,17 @@ export function OrderList() {
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                           <div className="w-full h-full ">
                             <>
-                              <div className="px-2 h-7 text-[11px] text-white rounded-3xl bg-green-400 flex items-center justify-center">
+                              <div
+                                className={`px-2 h-7 text-[11px] text-white rounded-3xl capitalize ${
+                                  order.status == "pending"
+                                    ? "bg-yellow-300"
+                                    : order.status === "delivered"
+                                    ? "bg-green-400"
+                                    : order.status === "rejected"
+                                    ? "bg-red-400"
+                                    : "bg-green-700"
+                                }  flex items-center justify-center`}
+                              >
                                 {order.status}
                               </div>
                             </>
