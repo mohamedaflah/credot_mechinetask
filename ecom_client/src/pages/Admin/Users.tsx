@@ -15,7 +15,7 @@ export function UsersPage() {
     dispatch(getAllUsersAction());
   }, [dispatch]);
   return (
-    <main className="w-full h-full px-5 space-y-2">
+    <main className="w-full h-full px-5 space-y-2 overflow-y-auto">
       <div className="w-full h-12  flex items-center justify-start">
         <h1>User Management</h1>
       </div>

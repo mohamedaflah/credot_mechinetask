@@ -17,7 +17,7 @@ export function BrandPage() {
   }, [dispatch]);
   const { brands, loading } = useSelector((state: RootState) => state.brand);
   return (
-    <main className="w-full h-full px-5 space-y-2">
+    <main className="w-full h-full px-5 space-y-2 overflow-y-auto">
       <div className="w-full h-12  flex items-center justify-end">
         <CustomeModal
           title="Add new brand"

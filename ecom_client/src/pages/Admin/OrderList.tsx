@@ -1,6 +1,17 @@
+import { orderStatus } from "@/constants/orderStatus";
+import { changeOrderStatus } from "@/redux/actions/order/changeOrder";
 import { getAllOrders } from "@/redux/actions/order/getAllOrders";
 
 import { AppDispatch, RootState } from "@/redux/store";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/shad/ui/select";
 import { format } from "date-fns";
 import { ListFilter } from "lucide-react";
 import { useEffect } from "react";
@@ -18,9 +29,12 @@ export function OrderList() {
     navigate(`varient/${id}`);
   };
   handleNavigation;
+  const handleChangeOrder = (value: string, orderId: string) => {
+    dispatch(changeOrderStatus({ orderId: orderId, status: value }));
+  };
   const { orders } = useSelector((state: RootState) => state.order);
   return (
-    <main className="w-full h-full px-5 space-y-5">
+    <main className="w-full h-full px-5 space-y-5 overflow-y-auto">
       <div className="w-full flex justify-between">
         <div className="">
           <h1>Orders listing</h1>
@@ -149,7 +163,31 @@ export function OrderList() {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          hLeo
+                          <div className="w-full flex justify-end">
+                            <Select
+                              onValueChange={(value) =>
+                                handleChangeOrder(value, String(order._id))
+                              }
+                            >
+                              <SelectTrigger className="w-[95px]">
+                                <SelectValue placeholder="status" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectLabel>Order status</SelectLabel>
+                                  {orderStatus.map((value) => (
+                                    <SelectItem
+                                      value={value}
+                                      className="capitalize"
+                                      key={value}
+                                    >
+                                      {value}
+                                    </SelectItem>
+                                  ))}
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </td>
                       </tr>
                     ))}

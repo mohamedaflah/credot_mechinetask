@@ -20,7 +20,7 @@ export function ProductList() {
   };
   const { products } = useSelector((state: RootState) => state.product);
   return (
-    <main className="w-full h-full px-5 space-y-5">
+    <main className="w-full h-full px-5 space-y-5 overflow-y-auto">
       <div className="w-full flex justify-between">
         <div className="">
           <h1>Product listing</h1>
