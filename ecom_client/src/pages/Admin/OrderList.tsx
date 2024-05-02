@@ -135,7 +135,7 @@ export function OrderList() {
                           )}
                           {order.products[0].productDetails.productName}
                           <div className="font-sans">
-                            {order.products.filter((_, index) => index >= 1)
+                            + {order.products.filter((_, index) => index >= 1)
                               .length >= 1 && (
                               <>
                                 {
@@ -143,7 +143,7 @@ export function OrderList() {
                                     (_, index) => index >= 1
                                   ).length
                                 }{" "}
-                                more
+                                more item
                               </>
                             )}
                           </div>
