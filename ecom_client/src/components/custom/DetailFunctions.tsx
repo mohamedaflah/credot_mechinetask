@@ -1,5 +1,5 @@
 import start from "../../assets/Vector.svg";
-import { IoMdHeartEmpty } from "react-icons/io";
+
 import QuantityButton from "../common/Qtybutton";
 import { IoCheckmark } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -167,9 +167,6 @@ function DetailFunctions() {
               <>{loading ? "Processing..." : "Add to cart"}</>
             )}
           </button>
-        </div>
-        <div className="flex gap-2 items-center mt-3">
-          Add to whish list <IoMdHeartEmpty className="text-2xl" />
         </div>
       </div>
     </div>
