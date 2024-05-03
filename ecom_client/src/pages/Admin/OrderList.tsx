@@ -56,14 +56,6 @@ export function OrderList() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-end">
-        <button
-          className="text-sm bg-blue-500 h-10 px-4 rounded-md text-white"
-          onClick={() => navigate("addproduct")}
-        >
-          Add new product
-        </button>
-      </div>
       <div className="w-full h-full  ">
         <div className="flex flex-col border rounded-sm">
           <div className="-m-1.5 overflow-x-auto">
@@ -135,10 +127,10 @@ export function OrderList() {
                           )}
                           {order.products[0].productDetails.productName}
                           <div className="font-sans">
-                            + {order.products.filter((_, index) => index >= 1)
+                             {order.products.filter((_, index) => index >= 1)
                               .length >= 1 && (
                               <>
-                                {
+                               + {
                                   order.products.filter(
                                     (_, index) => index >= 1
                                   ).length
